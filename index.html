@@ -2509,7 +2509,7 @@
 
   </div><!-- end res -->
 
-  <div id="refs" class="workshop-panel" role="tabpanel" hidden>
+  <div id="refs" class="workshop-panel" role="tabpanel">
     <h1 class="section-heading">References</h1>
     <p class="section-subtitle">All frameworks, articles, and resources cited or used in this workshop — APA 7th edition</p>
 
@@ -2631,9 +2631,376 @@
 
   </div><!-- end refs -->
 
+
+  <!-- CASES PANEL -->
+  <div id="cases" class="workshop-panel" role="tabpanel">
+    <h2 class="section-title" style="margin-bottom:4px">Case Studies</h2>
+    <p style="color:var(--ink-light);font-size:14px;margin-bottom:22px;line-height:1.6">Work through each case as a group. Read the case brief, then discuss each reflection question together and type your group's response. Download your responses at the end to keep a record.</p>
+
+    <style>
+      .sq-case { display:none; }
+      .sq-case.active { display:block; }
+      .sq-back { background:none; border:1px solid var(--border); color:var(--ink-mid); font-size:13px; padding:7px 14px; border-radius:20px; cursor:pointer; margin-bottom:20px; }
+      .sq-back:hover { background:var(--sand); }
+      .sq-case-title { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+      .sq-case-sub { font-size:13px; color:var(--ink-light); margin-bottom:18px; }
+      .sq-brief { background:var(--sand); border-radius:10px; margin-bottom:22px; overflow:hidden; }
+      .sq-brief-header { display:flex; justify-content:space-between; align-items:center; padding:13px 16px; cursor:pointer; font-size:14px; font-weight:600; color:var(--ink-mid); }
+      .sq-brief-header:hover { background:var(--parchment); }
+      .sq-brief-body { padding:0 16px 16px; font-size:14px; color:var(--ink-mid); line-height:1.7; display:none; }
+      .sq-brief-body.open { display:block; }
+      .sq-frameworks { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px; }
+      .sq-fw-chip { font-size:12px; background:var(--green-pale); color:var(--green); border-radius:20px; padding:4px 12px; font-weight:600; }
+      .sq-questions { display:flex; flex-direction:column; gap:18px; margin-bottom:24px; }
+      .sq-q { background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+      .sq-q-header { display:flex; align-items:flex-start; gap:12px; padding:14px 16px 10px; }
+      .sq-q-num { min-width:28px; height:28px; background:var(--ochre); color:#fff; border-radius:50%; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+      .sq-q-text { font-size:15px; color:var(--ink); line-height:1.6; font-weight:500; }
+      .sq-q-hint { font-size:12.5px; color:var(--ink-light); font-style:italic; padding:0 16px 6px 56px; line-height:1.5; }
+      .sq-textarea { width:100%; box-sizing:border-box; border:none; border-top:1px solid var(--border); padding:12px 16px; font-size:14px; font-family:inherit; color:var(--ink); background:var(--cream); resize:vertical; min-height:80px; outline:none; border-radius:0 0 12px 12px; }
+      .sq-textarea:focus { background:#fff; }
+      .sq-actions { display:flex; gap:12px; flex-wrap:wrap; }
+      .sq-dl-btn { background:var(--green); color:#fff; border:none; border-radius:8px; padding:11px 20px; font-size:14px; font-weight:600; cursor:pointer; }
+      .sq-dl-btn:hover { background:var(--green-mid); }
+      .sq-note { font-size:12px; color:var(--ink-light); margin-top:10px; font-style:italic; }
+    </style>
+
+    <!-- Cases grid -->
+    <div id="cases-grid" class="case-grid">
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#A0622A">Case 1</span>
+        <div class="case-client-name">Rahma</div>
+        <div class="case-client-sub">42 &middot; Hazara Afghan woman &middot; Borderline T2DM</div>
+        <div class="case-summary-text">Limited English proficiency. A 14-year-old daughter is present and attempting to translate. History of gestational diabetes, now borderline T2DM. Traditional diet, irregular meal patterns, distrust of unfamiliar health systems.</div>
+        <div class="case-chips">
+          <span class="case-chip">Interpreter use</span>
+          <span class="case-chip">Health literacy</span>
+          <span class="case-chip">Kleinman questions</span>
+          <span class="case-chip">Diabetes education</span>
+        </div>
+        <button class="case-open-btn" style="background:#A0622A" onclick="openSQCase('sq-c1')">Open case &rarr;</button>
+      </div>
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#2D5A3D">Case 2</span>
+        <div class="case-client-name">Mr. Gupta</div>
+        <div class="case-client-sub">63 &middot; Gujarati Indian man &middot; Hyperlipidaemia</div>
+        <div class="case-summary-text">Lives with adult son and daughter-in-law. Son manages appointments; daughter-in-law cooks. Strong preference for traditional Gujarati vegetarian food. Believes strength comes from heavy, warm foods. Resistant to Western dietary advice.</div>
+        <div class="case-chips">
+          <span class="case-chip">Family decision-making</span>
+          <span class="case-chip">LEARN model</span>
+          <span class="case-chip">Hot/cold beliefs</span>
+          <span class="case-chip">Cultural food practices</span>
+        </div>
+        <button class="case-open-btn" style="background:#2D5A3D" onclick="openSQCase('sq-c2')">Open case &rarr;</button>
+      </div>
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#B85C3A">Case 3</span>
+        <div class="case-client-name">Mr. Rossi</div>
+        <div class="case-client-sub">79 &middot; Italian-born widower &middot; Uncontrolled hypertension</div>
+        <div class="case-summary-text">Limited reading ability in English and Italian. High-sodium diet: preserved meats, cheeses, pickled vegetables. Deep emotional attachment to foods made by his late wife. Hides literacy difficulties. Feels judged by previous clinicians.</div>
+        <div class="case-chips">
+          <span class="case-chip">Open-ended questions</span>
+          <span class="case-chip">Health literacy</span>
+          <span class="case-chip">Kleinman approach</span>
+          <span class="case-chip">Food meaning</span>
+        </div>
+        <button class="case-open-btn" style="background:#B85C3A" onclick="openSQCase('sq-c3')">Open case &rarr;</button>
+      </div>
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#4A7B5C">Case 4</span>
+        <div class="case-client-name">Sione</div>
+        <div class="case-client-sub">19 &middot; Tongan-Australian &middot; Rugby player &amp; university student</div>
+        <div class="case-summary-text">Eats high-energy traditional family meals at home. Coach recommended "clean eating," conflicting with family values. Feels guilt refusing food from aunties. Worried health professionals won't understand Pacific food culture.</div>
+        <div class="case-chips">
+          <span class="case-chip">Cultural humility</span>
+          <span class="case-chip">Acculturation</span>
+          <span class="case-chip">Identity &amp; food</span>
+          <span class="case-chip">Performance nutrition</span>
+        </div>
+        <button class="case-open-btn" style="background:#4A7B5C" onclick="openSQCase('sq-c4')">Open case &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ── Case 1: Rahma ── -->
+    <div id="sq-c1" class="sq-case">
+      <button class="sq-back" onclick="closeSQCase('sq-c1')">&#8592; All cases</button>
+      <div class="sq-case-title">Case 1 &mdash; Rahma</div>
+      <div class="sq-case-sub">42 &middot; Hazara Afghan woman &middot; Borderline T2DM</div>
+      <div class="sq-brief">
+        <div class="sq-brief-header" onclick="toggleSQBrief(this)">
+          <span>&#128196; Case brief</span><span>&#9660;</span>
+        </div>
+        <div class="sq-brief-body">
+          <strong>Rahma</strong> is a 42-year-old Hazara woman from Afghanistan who arrived in Australia 2 years ago. She has limited English proficiency. Her 14-year-old daughter is present in the consultation and attempting to translate.<br><br>
+          <strong>Background:</strong> History of gestational diabetes, now borderline T2DM. Traditional diet (rice, naan, lentils, yogurt). Irregular meal patterns due to factory shift work. Distrust of unfamiliar health systems; has not attended regular GP follow-up.<br><br>
+          <strong>Your task:</strong> You are the student dietitian. Rahma has been referred for diabetes education and dietary counselling.
+        </div>
+      </div>
+      <div class="sq-frameworks">
+        <span class="sq-fw-chip">Interpreter ethics</span>
+        <span class="sq-fw-chip">Kleinman's questions</span>
+        <span class="sq-fw-chip">Plain language</span>
+        <span class="sq-fw-chip">Health literacy</span>
+        <span class="sq-fw-chip">ASKED model</span>
+      </div>
+      <div class="sq-questions">
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">1</div><div class="sq-q-text">The 14-year-old daughter immediately offers to translate. What are your ethical concerns, and what would you do in the first 2 minutes of this appointment?</div></div>
+          <div class="sq-q-hint">Consider: interpreter ethics, power dynamics, child burden, privacy, and the accuracy of health translation by a minor.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q1 — Interpreter ethics"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">2</div><div class="sq-q-text">Using Kleinman's explanatory model questions, how would you explore Rahma's understanding of her borderline T2DM — without imposing a biomedical frame?</div></div>
+          <div class="sq-q-hint">Write 2–3 questions you would actually ask Rahma, adapted for plain language and a professional interpreter.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q2 — Kleinman questions for Rahma"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">3</div><div class="sq-q-text">Rahma's traditional diet includes rice, naan, lentils, and yogurt. Before making any recommendations, what do you need to understand about the meaning and role of these foods in her daily and cultural life?</div></div>
+          <div class="sq-q-hint">Think about: religious significance, family role in food preparation, shift work and meal timing, and what "healthy eating" means in her worldview.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q3 — Cultural food meaning (Rahma)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">4</div><div class="sq-q-text">How would you adapt diabetes education for Rahma to ensure it is health-literate, culturally safe, and free of assumptions about her ability to change?</div></div>
+          <div class="sq-q-hint">Consider: visual tools, avoiding jargon, checking understanding without quizzing, and respecting her pace and autonomy.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q4 — Health-literate diabetes education"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">5</div><div class="sq-q-text">Reflect on your own cultural assumptions. What did you assume about Rahma before reading the full brief — and how might those assumptions have shaped your approach if you hadn't examined them?</div></div>
+          <div class="sq-q-hint">This is a cultural humility question. There is no right answer — honesty matters more than polish.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q5 — Self-reflection (Rahma)"></textarea>
+        </div>
+      </div>
+      <div class="sq-actions">
+        <button class="sq-dl-btn" onclick="downloadSQTranscript('sq-c1','Case 1 — Rahma')">&#8681; Download responses</button>
+      </div>
+      <p class="sq-note">Responses are stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- ── Case 2: Mr. Gupta ── -->
+    <div id="sq-c2" class="sq-case">
+      <button class="sq-back" onclick="closeSQCase('sq-c2')">&#8592; All cases</button>
+      <div class="sq-case-title">Case 2 &mdash; Mr. Gupta</div>
+      <div class="sq-case-sub">63 &middot; Gujarati Indian man &middot; Hyperlipidaemia</div>
+      <div class="sq-brief">
+        <div class="sq-brief-header" onclick="toggleSQBrief(this)">
+          <span>&#128196; Case brief</span><span>&#9660;</span>
+        </div>
+        <div class="sq-brief-body">
+          <strong>Mr. Gupta</strong> is a 63-year-old man recently diagnosed with hyperlipidaemia. He lives with his adult son and daughter-in-law in a multigenerational household.<br><br>
+          <strong>Background:</strong> Strong preference for traditional Gujarati vegetarian food (fried snacks, ghee-based dishes). His eldest son manages health appointments; daughter-in-law prepares all meals. He believes strength comes from "heavy, warm foods" and is resistant to Western dietary advice. Has hot/cold beliefs about food that influence what he eats during illness.<br><br>
+          <strong>Your task:</strong> You are the student dietitian conducting Mr. Gupta's first nutrition consultation. His son is present.
+        </div>
+      </div>
+      <div class="sq-frameworks">
+        <span class="sq-fw-chip">LEARN model</span>
+        <span class="sq-fw-chip">Family decision-making</span>
+        <span class="sq-fw-chip">Hot/cold food beliefs</span>
+        <span class="sq-fw-chip">ASKED model</span>
+        <span class="sq-fw-chip">Cultural food knowledge</span>
+      </div>
+      <div class="sq-questions">
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">1</div><div class="sq-q-text">Mr. Gupta's son has booked the appointment and is sitting in. How do you navigate the family dynamic while still ensuring Mr. Gupta is the central decision-maker in the consultation?</div></div>
+          <div class="sq-q-hint">Consider: who you address, how you establish rapport with Mr. Gupta directly, and whether involving the son is appropriate in this context.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q1 — Family decision-making (Gupta)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">2</div><div class="sq-q-text">Mr. Gupta believes that "heavy, warm foods" provide strength. How would you explore this belief using the LEARN model's Listen and Explain steps — without dismissing or pathologising his worldview?</div></div>
+          <div class="sq-q-hint">Write out what you would actually say in the consultation — not a theoretical answer, but real words.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q2 — LEARN model: Listen & Explain (Gupta)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">3</div><div class="sq-q-text">The daughter-in-law cooks all meals but is not present. How does this change your approach to dietary recommendations — and who else might need to be involved in the plan?</div></div>
+          <div class="sq-q-hint">Think about: consent, family involvement, how change actually happens in this household, and cultural safety for the daughter-in-law too.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q3 — Who cooks, who decides (Gupta)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">4</div><div class="sq-q-text">Using the Acknowledge–Recommend–Negotiate steps of LEARN, how would you work with Mr. Gupta to find common ground between his food beliefs and his lipid management goals?</div></div>
+          <div class="sq-q-hint">Be specific: what would you acknowledge? What would you recommend, and how? What would negotiation look like?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q4 — LEARN: Acknowledge–Recommend–Negotiate (Gupta)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">5</div><div class="sq-q-text">How much do you actually know about Gujarati cuisine and hot/cold food beliefs? What would genuine cultural humility look like in this consultation when you don't know what you don't know?</div></div>
+          <div class="sq-q-hint">There is no shame in not knowing. The question is how you respond to that gap — curiosity or assumption?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q5 — Cultural humility (Gupta)"></textarea>
+        </div>
+      </div>
+      <div class="sq-actions">
+        <button class="sq-dl-btn" onclick="downloadSQTranscript('sq-c2','Case 2 — Mr. Gupta')">&#8681; Download responses</button>
+      </div>
+      <p class="sq-note">Responses are stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- ── Case 3: Mr. Rossi ── -->
+    <div id="sq-c3" class="sq-case">
+      <button class="sq-back" onclick="closeSQCase('sq-c3')">&#8592; All cases</button>
+      <div class="sq-case-title">Case 3 &mdash; Mr. Rossi</div>
+      <div class="sq-case-sub">79 &middot; Italian-born widower &middot; Uncontrolled hypertension</div>
+      <div class="sq-brief">
+        <div class="sq-brief-header" onclick="toggleSQBrief(this)">
+          <span>&#128196; Case brief</span><span>&#9660;</span>
+        </div>
+        <div class="sq-brief-body">
+          <strong>Mr. Rossi</strong> is a 79-year-old Italian-born widower with limited reading ability in both English and Italian. He has uncontrolled hypertension and high sodium intake.<br><br>
+          <strong>Background:</strong> His diet consists of preserved meats, aged cheeses, and homemade pickled vegetables — foods he and his late wife prepared together for decades. He hides his difficulty reading labels and clinic forms. He has felt judged and dismissed by previous clinicians and is wary of being told to stop eating what he loves.<br><br>
+          <strong>Your task:</strong> You are the student dietitian. Mr. Rossi has been referred for sodium reduction counselling.
+        </div>
+      </div>
+      <div class="sq-frameworks">
+        <span class="sq-fw-chip">Kleinman's questions</span>
+        <span class="sq-fw-chip">Food meaning &amp; grief</span>
+        <span class="sq-fw-chip">Health literacy</span>
+        <span class="sq-fw-chip">Non-judgmental language</span>
+        <span class="sq-fw-chip">Kittler et al.</span>
+      </div>
+      <div class="sq-questions">
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">1</div><div class="sq-q-text">Mr. Rossi has low literacy in both languages and hides it. How would you structure a nutrition assessment that does not rely on reading or writing — and does not humiliate him in the process?</div></div>
+          <div class="sq-q-hint">Think about: verbal recall, visual tools, conversational framing, and avoiding forms or handouts in the initial consultation.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q1 — Health literacy (Rossi)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">2</div><div class="sq-q-text">Mr. Rossi's preserved meats and pickled vegetables are deeply connected to his late wife and their shared life. Using Kleinman's approach, how would you explore the meaning of these foods before any talk of change?</div></div>
+          <div class="sq-q-hint">Write 2–3 Kleinman-style questions adapted for Mr. Rossi. Remember: explore meaning first, clinical goals second.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q2 — Kleinman & food meaning (Rossi)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">3</div><div class="sq-q-text">Previous clinicians have made Mr. Rossi feel judged. What specific language or behaviours might have caused this — and what would you do differently in your consultation?</div></div>
+          <div class="sq-q-hint">Be specific. What words, tones, or body language signal judgement? What signals genuine curiosity and respect?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q3 — Non-judgemental practice (Rossi)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">4</div><div class="sq-q-text">Kittler et al. argue that food carries cultural memory, spiritual significance, and relational meaning. How does this framework change the way you think about "sodium reduction" as a clinical goal in Mr. Rossi's case?</div></div>
+          <div class="sq-q-hint">What would it look like to negotiate sodium reduction while genuinely honouring what these foods mean to him?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q4 — Food as meaning, not just nutrient (Rossi)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">5</div><div class="sq-q-text">Mr. Rossi is grieving. He is also 79. How do you balance clinical goals around blood pressure with his quality of life, autonomy, and what makes life meaningful to him at this stage?</div></div>
+          <div class="sq-q-hint">There is no clean answer here. The question is about whose values drive the consultation — yours or his.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q5 — Autonomy, grief & clinical goals (Rossi)"></textarea>
+        </div>
+      </div>
+      <div class="sq-actions">
+        <button class="sq-dl-btn" onclick="downloadSQTranscript('sq-c3','Case 3 — Mr. Rossi')">&#8681; Download responses</button>
+      </div>
+      <p class="sq-note">Responses are stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- ── Case 4: Sione ── -->
+    <div id="sq-c4" class="sq-case">
+      <button class="sq-back" onclick="closeSQCase('sq-c4')">&#8592; All cases</button>
+      <div class="sq-case-title">Case 4 &mdash; Sione</div>
+      <div class="sq-case-sub">19 &middot; Tongan-Australian &middot; Rugby player &amp; university student</div>
+      <div class="sq-brief">
+        <div class="sq-brief-header" onclick="toggleSQBrief(this)">
+          <span>&#128196; Case brief</span><span>&#9660;</span>
+        </div>
+        <div class="sq-brief-body">
+          <strong>Sione</strong> is a 19-year-old Tongan-Australian university student and rugby player who has been referred by his sports coach for dietary review.<br><br>
+          <strong>Background:</strong> At home, Sione eats large, shared traditional Tongan family meals — food is central to family identity, respect, and community. His coach has recommended "clean eating" which conflicts with his family's values. He feels guilt when he refuses food from his aunties. He is worried that health professionals won't understand Pacific food culture and will tell him to stop eating what his family cooks.<br><br>
+          <strong>Your task:</strong> You are the student dietitian. Sione has come in alone. He says straight away: "I just want to eat better for footy — but I can't disrespect my family."
+        </div>
+      </div>
+      <div class="sq-frameworks">
+        <span class="sq-fw-chip">Cultural humility</span>
+        <span class="sq-fw-chip">Tervalon &amp; Murray-García</span>
+        <span class="sq-fw-chip">Acculturation</span>
+        <span class="sq-fw-chip">Collectivist food culture</span>
+        <span class="sq-fw-chip">LEARN model</span>
+      </div>
+      <div class="sq-questions">
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">1</div><div class="sq-q-text">Sione opens with: "I just want to eat better for footy — but I can't disrespect my family." What does cultural humility look like in your very first response to this statement?</div></div>
+          <div class="sq-q-hint">Don't jump to solutions. What does genuinely listening look like here? What assumptions might you be tempted to make?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q1 — First response (Sione)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">2</div><div class="sq-q-text">In Pacific cultures, sharing food is often an expression of love, obligation, and respect. How does understanding this ontology change the way you frame "dietary change" as a clinical goal?</div></div>
+          <div class="sq-q-hint">What would it mean to ask Sione to eat differently at home? Whose values are embedded in the idea of "performance nutrition"?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q2 — Collectivist food culture (Sione)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">3</div><div class="sq-q-text">Sione is navigating acculturation — living between Tongan family values and Western sporting culture. How might this dual identity tension affect his wellbeing, and how do you hold space for that in a dietetic consultation?</div></div>
+          <div class="sq-q-hint">This goes beyond food. Identity, belonging, and guilt are all present in this consultation.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q3 — Acculturation & identity (Sione)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">4</div><div class="sq-q-text">Using the LEARN model's Negotiate step, how would you work with Sione to find realistic performance nutrition goals that genuinely honour his cultural meals — not just tolerate them?</div></div>
+          <div class="sq-q-hint">Be specific. What changes could honour his family obligations? What would you never suggest, and why?</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q4 — LEARN: Negotiating with cultural meals (Sione)"></textarea>
+        </div>
+        <div class="sq-q">
+          <div class="sq-q-header"><div class="sq-q-num">5</div><div class="sq-q-text">Tervalon and Murray-García argue that cultural humility requires recognising and challenging power imbalances in the practitioner-patient relationship. Where does power sit in this consultation — and how do you actively redistribute it?</div></div>
+          <div class="sq-q-hint">Think about: whose expertise matters here, who defines "healthy," and how you invite Sione to lead rather than just comply.</div>
+          <textarea class="sq-textarea" placeholder="Your group's response..." data-label="Q5 — Power & cultural humility (Sione)"></textarea>
+        </div>
+      </div>
+      <div class="sq-actions">
+        <button class="sq-dl-btn" onclick="downloadSQTranscript('sq-c4','Case 4 — Sione')">&#8681; Download responses</button>
+      </div>
+      <p class="sq-note">Responses are stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+  </div><!-- end cases -->
+
 </main>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // ── Tab switching ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.workshop-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected','true');
+  }
+
+  // ── Case study (static) ──
+  function openSQCase(id) {
+    document.getElementById('cases-grid').style.display = 'none';
+    document.querySelectorAll('.sq-case').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+  function closeSQCase(id) {
+    document.getElementById(id).classList.remove('active');
+    document.getElementById('cases-grid').style.display = '';
+    window.scrollTo(0,0);
+  }
+  function toggleSQBrief(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('span:last-child');
+    const open = body.classList.toggle('open');
+    arrow.textContent = open ? '▲' : '▼';
+  }
+  function downloadSQTranscript(caseId, caseLabel) {
+    const panel = document.getElementById(caseId);
+    const textareas = panel.querySelectorAll('.sq-textarea');
+    let hasContent = false;
+    textareas.forEach(t => { if (t.value.trim()) hasContent = true; });
+    if (!hasContent) { alert('No responses yet — type your group\'s answers first!'); return; }
+    const lines = ['DIET7103 — ' + caseLabel, 'Downloaded: ' + new Date().toLocaleString('en-AU'), '='.repeat(60), ''];
+    textareas.forEach(t => {
+      lines.push('[' + (t.dataset.label || 'Question') + ']');
+      lines.push(t.value.trim() || '(no response)');
+      lines.push('');
+    });
+    const text = lines.join('\n');
+    const filename = 'DIET7103_' + caseLabel.replace(/[^a-zA-Z0-9]/g,'_') + '_responses.txt';
+    try {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+    } catch(e) {
+      const w = window.open('', '_blank');
+      w.document.write('<pre>' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>');
+    }
+  }
+
+
   // ── ASKED Data ──
   const askedData = {
     A: {
@@ -2693,16 +3060,7 @@
   };
 
   // ── Tab switching ──
-  function switchTab(id, btn) {
-    document.querySelectorAll('.workshop-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-  }
-
-  // ── Resource filter ──
-  function toggleKleinman(el) {
+    function toggleKleinman(el) {
     const body = el.querySelector('.kleinman-q-body');
     const arrow = el.querySelector('.kleinman-arrow');
     const isOpen = !body.hidden;
@@ -2830,276 +3188,7 @@
   }
 
   // ── CASE STUDY CHATBOTS ──
-  const CASE_DATA = {
-    c2: {
-      color: '#A0622A',
-      label: 'Case 1',
-      name: 'Rahma',
-      system: `You are a Socratic learning facilitator for a dietetics education exercise about a client named Rahma — a 42-year-old Hazara Afghan woman with borderline T2DM, limited English, and a 14-year-old daughter who is trying to interpret. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Rahma or any other character. You ask probing questions that push students to think more deeply. Key frameworks students should apply: Kleinman's Explanatory Model questions, professional interpreter protocols, plain-language communication, health literacy principles, cultural food beliefs (Kittler et al.). Rules: Never give the answer directly. Always respond with a question or a prompt that deepens reflection. If a student gives a correct idea, affirm it briefly then push further. If a student gives a vague or incorrect idea, ask a clarifying question. Keep responses short — 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name when relevant. Scaffold gently if students are stuck. You are a facilitator only — never Rahma, never her daughter.`
-    },
-    c3: {
-      color: '#2D5A3D',
-      label: 'Case 2',
-      name: 'Mr. Gupta',
-      system: `You are a Socratic learning facilitator for a dietetics case study about Mr. Gupta — a 63-year-old Gujarati Indian man with hyperlipidaemia who lives in a multigenerational household where his son manages health and his daughter-in-law cooks. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Mr. Gupta, his son, or his daughter-in-law. Key frameworks: LEARN model (especially Acknowledge–Recommend–Negotiate), Campinha-Bacote's ASKED model (Encounters and Knowledge), cultural explanatory models of illness, hot/cold food belief systems, respectful modification of cultural food practices. Rules: Never give the answer directly. Respond with probing questions. Affirm correct ideas briefly then push further. Keep responses to 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name. You are a facilitator only.`
-    },
-    c4: {
-      color: '#B85C3A',
-      label: 'Case 3',
-      name: 'Mr. Rossi',
-      system: `You are a Socratic learning facilitator for a dietetics case study about Mr. Rossi — a 79-year-old Italian-born widower with limited literacy, strong emotional attachment to his late wife's cooking, high sodium intake, and uncontrolled hypertension. He hides his literacy difficulties and has felt judged by previous clinicians. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Mr. Rossi. Key frameworks: Kleinman's Explanatory Model, open-ended non-judgmental questioning, health literacy principles, non-literacy-dependent assessment, symbolic meaning of food (Kittler et al.), observation-based rather than judgement-based feedback. Rules: Never give the answer directly. Respond with probing questions. Challenge judgement-laden ideas directly. Keep responses to 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name. You are a facilitator only.`
-    },
-    c5: {
-      color: '#4A7B5C',
-      label: 'Case 4',
-      name: 'Sione',
-      system: `You are a Socratic learning facilitator for a dietetics case study about Sione — a 19-year-old Tongan-Australian university student and rugby player navigating tension between Western clean eating advice from his coach and the deep cultural meaning of shared family meals in his Tongan household. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Sione, his family, or his coach. Key frameworks: Cultural humility (Tervalon & Murray-García), acculturation and cultural identity, collectivist food culture, LEARN model negotiation steps, the difference between cultural humility and cultural competence. Rules: Never give the answer directly. Respond with probing questions. Challenge assumptions students make about Pacific cultures. Push students to distinguish cultural humility from competence. Keep responses to 2–4 sentences plus a question. Do not lecture. You are a facilitator only.`
-    }
-  };
-
-  const chatState = { c2: { history: [] }, c3: { history: [] }, c4: { history: [] }, c5: { history: [] } };
-
-  function openCase(id) {
-    document.getElementById('cases-grid').style.display = 'none';
-    document.getElementById('chat-' + id).classList.add('active');
-    if (chatState[id].history.length === 0) {
-      const msgs = {
-        c2: "Welcome to Case 1. Before we dive in — your group has just been handed Rahma's referral. The 14-year-old daughter is already in the room and ready to translate. What is your first concern, and why?",
-        c3: "Welcome to Case 2. You're about to meet Mr. Gupta for the first time. His son booked the appointment and is sitting beside him. Before you say hello — what do you need to understand about this family structure, and why does it matter for your consultation?",
-        c4: "Welcome to Case 3. Mr. Rossi is in the waiting room. You've read the referral: 79 years old, high sodium, won't change diet. Before you call him in — what assumptions might you already be carrying about him, and how might those affect your approach?",
-        c5: "Welcome to Case 4. Sione has come in on his own. He says straight away: 'I just want to eat better for footy — but I can't disrespect my family.' Where do you begin, and what does cultural humility look like in this very first moment?"
-      };
-      const opening = msgs[id];
-      addMessage(id, 'tutor', opening);
-      chatState[id].history.push({ role: 'assistant', content: opening });
-    }
-  }
-
-  function closeCase(id) {
-    document.getElementById('chat-' + id).classList.remove('active');
-    document.getElementById('cases-grid').style.display = '';
-  }
-
-  function toggleBrief(id) {
-    const body = document.getElementById('brief-' + id);
-    const icon = document.getElementById('brief-icon-' + id);
-    const hidden = body.style.display === 'none';
-    body.style.display = hidden ? 'block' : 'none';
-    icon.textContent = hidden ? '▲' : '▼';
-  }
-
-  function addMessage(id, role, text) {
-    const box = document.getElementById('msgs-' + id);
-    const div = document.createElement('div');
-    div.className = 'chat-msg ' + role;
-    div.innerHTML = text.replace(/\n/g, '<br>');
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-    return div;
-  }
-
-  async function sendMessage(id) {
-    const input = document.getElementById('input-' + id);
-    const sendBtn = document.getElementById('send-' + id);
-    const text = input.value.trim();
-    if (!text) return;
-    addMessage(id, 'student', text);
-    chatState[id].history.push({ role: 'user', content: text });
-    input.value = '';
-    input.style.height = '46px';
-    sendBtn.disabled = true;
-    const loadingDiv = addMessage(id, 'loading', 'Thinking\u2026');
-    try {
-      const cd = CASE_DATA[id];
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: cd.system,
-          messages: chatState[id].history
-        })
-      });
-      const data = await response.json();
-      const reply = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
-      loadingDiv.remove();
-      addMessage(id, 'tutor', reply);
-      chatState[id].history.push({ role: 'assistant', content: reply });
-    } catch(e) {
-      loadingDiv.remove();
-      addMessage(id, 'tutor', 'Connection error. Please check your internet connection and try again.');
-    }
-    sendBtn.disabled = false;
-    input.focus();
-  }
-
-  function handleChatKey(e, id) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(id); }
-  }
-
-  function autoResize(el) {
-    el.style.height = '46px';
-    el.style.height = Math.min(el.scrollHeight, 130) + 'px';
-  }
-
-  function downloadTranscript(id) {
-    const cd = CASE_DATA[id];
-    if (chatState[id].history.length === 0) {
-      alert('No conversation yet — start the case first!');
-      return;
-    }
-    const lines = ['DIET7103 — ' + cd.label + ': ' + cd.name, 'Downloaded: ' + new Date().toLocaleString('en-AU'), '='.repeat(60), ''];
-    chatState[id].history.forEach(m => {
-      lines.push('[' + (m.role === 'user' ? 'STUDENT GROUP' : 'AI TUTOR') + ']');
-      lines.push(m.content.replace(/<[^>]+>/g, ''));
-      lines.push('');
-    });
-    const text = lines.join('\n');
-    const filename = 'DIET7103_' + cd.label.replace(' ', '') + '_transcript.txt';
-    try {
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
-    } catch(e) {
-      const w = window.open('', '_blank');
-      w.document.write('<pre style="font-family:monospace;white-space:pre-wrap;padding:20px">' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>');
-      w.document.title = filename;
-    }
-  }
+                    
 </script>
-<!-- CASES PANEL -->
-  <div id="cases" class="workshop-panel" role="tabpanel" hidden>
-    <h2 class="section-title" style="margin-bottom:4px">Case Studies</h2>
-    <p style="color:var(--ink-light);font-size:14px;margin-bottom:22px;line-height:1.6">Work through each case as a group. The AI tutor will ask questions to deepen your thinking — it will never roleplay the client or give away answers. Download your transcript to submit via your LMS.</p>
-
-    <div id="cases-grid" class="case-grid">
-
-      <div class="case-card">
-        <span class="case-num-badge" style="background:#A0622A">Case 1</span>
-        <div class="case-client-name">Rahma</div>
-        <div class="case-client-sub">42 &middot; Hazara Afghan woman &middot; Borderline T2DM</div>
-        <div class="case-summary-text">Limited English proficiency. A 14-year-old daughter is present and attempting to translate. History of gestational diabetes, now borderline T2DM. Traditional diet, irregular meal patterns, distrust of unfamiliar health systems.</div>
-        <div class="case-chips">
-          <span class="case-chip">Interpreter use</span>
-          <span class="case-chip">Health literacy</span>
-          <span class="case-chip">Kleinman questions</span>
-          <span class="case-chip">Diabetes education</span>
-        </div>
-        <button class="case-open-btn" style="background:#A0622A" onclick="openCase('c2')">Open case &rarr;</button>
-      </div>
-
-      <div class="case-card">
-        <span class="case-num-badge" style="background:#2D5A3D">Case 2</span>
-        <div class="case-client-name">Mr. Gupta</div>
-        <div class="case-client-sub">63 &middot; Gujarati Indian man &middot; Hyperlipidaemia</div>
-        <div class="case-summary-text">Lives with adult son and daughter-in-law. Son manages appointments; daughter-in-law cooks. Strong preference for traditional Gujarati vegetarian food. Believes strength comes from heavy, warm foods. Resistant to Western dietary advice.</div>
-        <div class="case-chips">
-          <span class="case-chip">Family decision-making</span>
-          <span class="case-chip">LEARN model</span>
-          <span class="case-chip">Hot/cold beliefs</span>
-          <span class="case-chip">Cultural food practices</span>
-        </div>
-        <button class="case-open-btn" style="background:#2D5A3D" onclick="openCase('c3')">Open case &rarr;</button>
-      </div>
-
-      <div class="case-card">
-        <span class="case-num-badge" style="background:#B85C3A">Case 3</span>
-        <div class="case-client-name">Mr. Rossi</div>
-        <div class="case-client-sub">79 &middot; Italian-born widower &middot; Uncontrolled hypertension</div>
-        <div class="case-summary-text">Limited reading ability in English and Italian. High-sodium diet: preserved meats, cheeses, pickled vegetables. Deep emotional attachment to foods made by his late wife. Hides literacy difficulties. Feels judged by previous clinicians.</div>
-        <div class="case-chips">
-          <span class="case-chip">Open-ended questions</span>
-          <span class="case-chip">Health literacy</span>
-          <span class="case-chip">Kleinman approach</span>
-          <span class="case-chip">Food meaning</span>
-        </div>
-        <button class="case-open-btn" style="background:#B85C3A" onclick="openCase('c4')">Open case &rarr;</button>
-      </div>
-
-      <div class="case-card">
-        <span class="case-num-badge" style="background:#4A7B5C">Case 4</span>
-        <div class="case-client-name">Sione</div>
-        <div class="case-client-sub">19 &middot; Tongan-Australian &middot; Rugby player &amp; university student</div>
-        <div class="case-summary-text">Eats high-energy traditional family meals at home. Coach recommended "clean eating," conflicting with family values. Feels guilt refusing food from aunties. Worried health professionals won't understand Pacific food culture.</div>
-        <div class="case-chips">
-          <span class="case-chip">Cultural humility</span>
-          <span class="case-chip">Acculturation</span>
-          <span class="case-chip">Identity &amp; food</span>
-          <span class="case-chip">Performance nutrition</span>
-        </div>
-        <button class="case-open-btn" style="background:#4A7B5C" onclick="openCase('c5')">Open case &rarr;</button>
-      </div>
-
-    </div>
-
-    <!-- Chat C2 -->
-    <div id="chat-c2" class="case-chat-wrap">
-      <button class="chat-back-btn" onclick="closeCase('c2')">&#8592; All cases</button>
-      <div class="chat-case-title">Case 1 &mdash; Rahma</div>
-      <div class="chat-brief">
-        <div class="chat-brief-header" onclick="toggleBrief('c2')"><span>&#128196; Case brief</span><span id="brief-icon-c2">&#9660;</span></div>
-        <div class="chat-brief-body" id="brief-c2" style="display:none"><strong>Rahma</strong> is a 42-year-old Hazara woman from Afghanistan, arrived in Australia 2 years ago. Limited English; 14-year-old daughter present and attempting to translate.<br><br><strong>Background:</strong> History of gestational diabetes, now borderline T2DM. Traditional diet (rice, naan, lentils, yogurt). Irregular meal patterns due to factory shifts. Distrust of unfamiliar health systems.<br><br><strong>Tasks:</strong> Request a professional female interpreter and explain why family cannot interpret high-risk health information. Adapt diabetes education to plain language. Replace idioms with clear instructions. Use visuals for blood sugar patterns and portions. Apply Kleinman-style questions to understand Rahma's beliefs about diabetes.</div>
-      </div>
-      <div class="chat-messages" id="msgs-c2"></div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="input-c2" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c2')"></textarea>
-        <button class="chat-send-btn" id="send-c2" onclick="sendMessage('c2')">Send</button>
-      </div>
-      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c2')">&#8681; Download transcript for your records</button></div>
-      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
-    </div>
-
-    <!-- Chat C3 -->
-    <div id="chat-c3" class="case-chat-wrap">
-      <button class="chat-back-btn" onclick="closeCase('c3')">&#8592; All cases</button>
-      <div class="chat-case-title">Case 2 &mdash; Mr. Gupta</div>
-      <div class="chat-brief">
-        <div class="chat-brief-header" onclick="toggleBrief('c3')"><span>&#128196; Case brief</span><span id="brief-icon-c3">&#9660;</span></div>
-        <div class="chat-brief-body" id="brief-c3" style="display:none"><strong>Mr. Gupta</strong> is a 63-year-old man recently diagnosed with hyperlipidaemia. Lives with his adult son and daughter-in-law.<br><br><strong>Background:</strong> Strong preference for traditional Gujarati vegetarian food (fried snacks, ghee-based dishes). Eldest son manages health appointments; daughter-in-law cooks all meals. Believes strength comes from "heavy, warm foods." Resistant to Western dietary advice.<br><br><strong>Tasks:</strong> Map the family decision-making structure using Campinha-Bacote's encounters and cultural knowledge. Apply Acknowledge&ndash;Recommend&ndash;Negotiate from the LEARN model. Offer culturally relevant alternatives. Identify how hot/cold beliefs influence food choices.</div>
-      </div>
-      <div class="chat-messages" id="msgs-c3"></div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="input-c3" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c3')"></textarea>
-        <button class="chat-send-btn" id="send-c3" onclick="sendMessage('c3')">Send</button>
-      </div>
-      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c3')">&#8681; Download transcript for your records</button></div>
-      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
-    </div>
-
-    <!-- Chat C4 -->
-    <div id="chat-c4" class="case-chat-wrap">
-      <button class="chat-back-btn" onclick="closeCase('c4')">&#8592; All cases</button>
-      <div class="chat-case-title">Case 3 &mdash; Mr. Rossi</div>
-      <div class="chat-brief">
-        <div class="chat-brief-header" onclick="toggleBrief('c4')"><span>&#128196; Case brief</span><span id="brief-icon-c4">&#9660;</span></div>
-        <div class="chat-brief-body" id="brief-c4" style="display:none"><strong>Mr. Rossi</strong> is a 79-year-old Italian-born widower with limited reading ability in English and Italian. Uncontrolled hypertension and high sodium intake.<br><br><strong>Background:</strong> Diet of preserved meats, cheeses, homemade pickled vegetables. Deep emotional attachment to foods prepared by his late wife. Hides difficulty reading labels. Feels judged by previous clinicians.<br><br><strong>Tasks:</strong> Conduct a nutrition assessment using open-ended, non-literacy-dependent questions. Use visual tools (food models, pictures of lower-salt alternatives). Explore food's emotional meaning using Kleinman's approach. Ask what family traditions matter most before recommending changes.</div>
-      </div>
-      <div class="chat-messages" id="msgs-c4"></div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="input-c4" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c4')"></textarea>
-        <button class="chat-send-btn" id="send-c4" onclick="sendMessage('c4')">Send</button>
-      </div>
-      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c4')">&#8681; Download transcript for your records</button></div>
-      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
-    </div>
-
-    <!-- Chat C5 -->
-    <div id="chat-c5" class="case-chat-wrap">
-      <button class="chat-back-btn" onclick="closeCase('c5')">&#8592; All cases</button>
-      <div class="chat-case-title">Case 4 &mdash; Sione</div>
-      <div class="chat-brief">
-        <div class="chat-brief-header" onclick="toggleBrief('c5')"><span>&#128196; Case brief</span><span id="brief-icon-c5">&#9660;</span></div>
-        <div class="chat-brief-body" id="brief-c5" style="display:none"><strong>Sione</strong> is a 19-year-old Tongan-Australian university student and rugby player.<br><br><strong>Background:</strong> Eats high-energy traditional family meals at home (large portions, shared dishes). Team coach recommended "clean eating," which conflicts with family values. Feels guilt refusing food from aunties. Worried that health professionals don't understand Pacific food culture.<br><br><strong>Tasks:</strong> Explore the meaning of food in Sione's family &mdash; community, respect, identity. Identify where Western nutrition guidance clashes with cultural expectations. Negotiate realistic performance nutrition goals that honour cultural meals. Practise cultural humility: acknowledge what you don't know about Pacific foodways.</div>
-      </div>
-      <div class="chat-messages" id="msgs-c5"></div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="input-c5" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c5')"></textarea>
-        <button class="chat-send-btn" id="send-c5" onclick="sendMessage('c5')">Send</button>
-      </div>
-      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c5')">&#8681; Download transcript
+</body>
+</html>
