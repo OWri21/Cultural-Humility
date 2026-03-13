@@ -1,0 +1,3105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIET7103 — Cultural Safety Workshops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ochre: #A0622A;
+    --ochre-light: #C8884E;
+    --ochre-pale: #F0DCC4;
+    --terra: #B85C3A;
+    --terra-pale: #F5E2D8;
+    --green: #2D5A3D;
+    --green-mid: #4A7B5C;
+    --green-pale: #D6EAE0;
+    --sand: #EDE3D3;
+    --cream: #FAF6EF;
+    --parchment: #F4EDE0;
+    --ink: #1E130C;
+    --ink-mid: #4A3828;
+    --ink-light: #7A6555;
+    --border: #D9C9B5;
+    --white: #FFFFFF;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--green);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(30,19,12,0.15);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+  }
+
+  /* ── TABS ── */
+  .tab-bar {
+    background: var(--parchment);
+    border-bottom: 1.5px solid var(--border);
+    position: sticky;
+    top: 65px;
+    z-index: 90;
+  }
+  .tab-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 14px 20px;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .tab-btn:hover { color: var(--ochre); }
+  .tab-btn.active {
+    color: var(--ochre);
+    font-weight: 500;
+    border-bottom-color: var(--ochre);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+  .workshop-panel { display: none; }
+  .workshop-panel.active { display: block; }
+
+  /* ── ACKNOWLEDGMENT BANNER ── */
+  .ack-banner {
+    background: linear-gradient(135deg, var(--green) 0%, #1E4030 100%);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ack-banner::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .ack-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .ack-text {
+    color: rgba(255,255,255,0.92);
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 300;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+  .ack-text strong {
+    color: #fff;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--ink-light);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .block-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ochre);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .block-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .concept-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .concept-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .concept-card:hover { border-color: var(--ochre-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(160,98,42,0.12); }
+  .concept-card:hover::before { background: var(--ochre); }
+  .concept-card.open::before { background: var(--ochre); }
+  .concept-card.open { border-color: var(--ochre-light); }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+  .card-icon.green { background: var(--green-pale); }
+  .card-icon.ochre { background: var(--ochre-pale); }
+  .card-icon.terra { background: var(--terra-pale); }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .card-peek {
+    font-size: 14px;
+    color: var(--ink-light);
+    font-weight: 300;
+  }
+  .card-body {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .card-body.open { display: block; }
+  .card-toggle {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--sand);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    color: var(--ink-light);
+    transition: all 0.2s;
+  }
+  .concept-card.open .card-toggle { background: var(--ochre-pale); color: var(--ochre); transform: rotate(45deg); }
+
+  /* ── ACCORDION ── */
+  .accordion { margin-bottom: 32px; }
+  .acc-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .acc-item:hover { border-color: var(--ochre-light); }
+  .acc-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .acc-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .acc-dot.ochre { background: var(--ochre); }
+  .acc-dot.terra { background: var(--terra); }
+  .acc-dot.green { background: var(--green); }
+  .acc-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    flex: 1;
+  }
+  .acc-arrow {
+    font-size: 13px;
+    color: var(--ink-light);
+    transition: transform 0.2s;
+  }
+  .acc-item.open .acc-arrow { transform: rotate(90deg); }
+  .acc-body {
+    display: none;
+    padding: 0 20px 18px 44px;
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .acc-body.open { display: block; }
+  .acc-body ul { padding-left: 18px; }
+  .acc-body ul li { margin-bottom: 6px; }
+
+  /* ── QUOTE CALLOUT ── */
+  .quote-callout {
+    background: var(--ochre-pale);
+    border-left: 4px solid var(--ochre);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 18px 22px;
+    margin-bottom: 32px;
+    font-style: italic;
+    color: var(--ink-mid);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .quote-callout strong {
+    font-style: normal;
+    color: var(--ochre);
+    font-weight: 500;
+  }
+
+  /* ── ROLES STRIP ── */
+  .roles-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .role-card {
+    background: var(--green-pale);
+    border: 1px solid #B5D9C5;
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .role-title {
+    font-weight: 500;
+    color: var(--green);
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .role-desc {
+    font-size: 14px;
+    color: #2D5A3D;
+    line-height: 1.65;
+  }
+
+  /* ── INTERACTIVE FRAMEWORK ── */
+  .framework-container {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .framework-header {
+    background: var(--parchment);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .framework-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .framework-tag {
+    font-size: 12px;
+    background: var(--ochre-pale);
+    color: var(--ochre);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ASKED / LEARN models */
+  .model-letters {
+    display: flex;
+    padding: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .letter-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    background: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .letter-btn:hover { border-color: var(--ochre-light); color: var(--ochre); background: var(--ochre-pale); }
+  .letter-btn.active { border-color: var(--ochre); background: var(--ochre); color: #fff; }
+  .model-detail {
+    padding: 0 20px 20px;
+    animation: fadeIn 0.2s ease;
+  }
+  .model-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ochre);
+    margin-bottom: 8px;
+  }
+  .model-desc {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    max-width: 600px;
+  }
+  .model-example {
+    margin-top: 12px;
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--ink-mid);
+  }
+  .model-example-label {
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+
+  /* 4 Cs */
+  .fourcee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px;
+  }
+  .cee-card {
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .cee-card:nth-child(1) { background: var(--ochre-pale); }
+  .cee-card:nth-child(2) { background: var(--terra-pale); }
+  .cee-card:nth-child(3) { background: var(--green-pale); }
+  .cee-card:nth-child(4) { background: #EDE8F5; }
+  .cee-card:hover { border-color: var(--ochre-light); transform: scale(1.01); }
+  .cee-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ochre);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cee-card:nth-child(2) .cee-letter { color: var(--terra); }
+  .cee-card:nth-child(3) .cee-letter { color: var(--green); }
+  .cee-card:nth-child(4) .cee-letter { color: #6B5BA0; }
+  .cee-word {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .cee-body { font-size: 14px; color: var(--ink-mid); line-height: 1.65; }
+
+  /* LEARN visual flow */
+  .learn-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  .learn-step {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .learn-step:hover .learn-circle { transform: scale(1.1); }
+  .learn-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 auto 10px;
+    transition: transform 0.2s;
+  }
+  .learn-circle.l { background: var(--green); }
+  .learn-circle.e { background: var(--ochre); }
+  .learn-circle.a { background: var(--terra); }
+  .learn-circle.r { background: #6B5BA0; }
+  .learn-circle.n { background: #2E6B8A; }
+  .learn-word { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .learn-sub { font-size: 12px; color: var(--ink-light); line-height: 1.4; }
+  .learn-connector {
+    width: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+  }
+  .learn-connector svg { overflow: visible; }
+  .learn-detail {
+    background: var(--parchment);
+    border-top: 1px solid var(--border);
+    padding: 16px 20px;
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .learn-detail.show { display: block; }
+  .learn-detail-title {
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-marker {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    margin-top: 2px;
+    background: var(--white);
+  }
+  .check-marker.checked { background: var(--green); border-color: var(--green); }
+  .check-marker.checked::after { content: '✓'; font-size: 12px; color: #fff; font-weight: 500; }
+  .checklist li.checked-item > span { text-decoration: line-through; opacity: 0.5; }
+
+  /* ── CLINICAL EDUCATION ── */
+  .clin-intro {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    padding: 18px 22px;
+    background: var(--parchment);
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--green);
+  }
+  .clin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .clin-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .clin-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .clin-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .clin-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .clin-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .clin-list li {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 16px;
+    position: relative;
+  }
+  .clin-list li:last-child { border-bottom: none; }
+  .clin-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--ochre);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  .clin-callout {
+    background: var(--green-pale);
+    border: 1px solid #B5D9C5;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--green);
+    line-height: 1.75;
+  }
+  .clin-callout strong { color: var(--green); }
+  .clin-callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  .res-topic.cald { background: #E8EAF8; color: #3A42A0; }
+
+  /* ── ONTOLOGY CARD ── */
+  .onto-card {
+    background: var(--white);
+    border: 1.5px solid var(--green-mid);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .onto-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    cursor: pointer;
+    user-select: none;
+    gap: 16px;
+    transition: background 0.15s;
+  }
+  .onto-header:hover { background: var(--green-pale); }
+  .onto-header-left { display: flex; align-items: center; gap: 14px; }
+  .onto-icon { font-size: 26px; flex-shrink: 0; }
+  .onto-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .onto-peek { font-size: 13px; color: var(--ink-light); }
+  .onto-toggle {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .onto-toggle:hover { background: var(--green-mid); }
+
+  .onto-body { border-top: 1px solid var(--border); }
+
+  .onto-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment);
+  }
+  .onto-tab {
+    flex: 1;
+    padding: 12px 8px;
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .onto-tab:hover { color: var(--green); background: var(--green-pale); }
+  .onto-tab.active { color: var(--green); border-bottom-color: var(--green); background: var(--white); font-weight: 600; }
+
+  .onto-tab-panel { padding: 22px 22px 26px; }
+
+  /* Definitions tab */
+  .onto-def-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) { .onto-def-grid { grid-template-columns: 1fr; } }
+  .onto-def-card {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .onto-def-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .onto-def-body {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .onto-def-example {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.6;
+    border-left: 3px solid var(--green-mid);
+    padding-left: 10px;
+    font-style: italic;
+  }
+  .onto-why-box {
+    background: var(--green-pale);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+  }
+  .onto-why-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .onto-why-box p { font-size: 14px; color: var(--ink-mid); line-height: 1.65; margin: 0; }
+
+  /* Contrast tab */
+  .onto-contrast-table {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    font-size: 13.5px;
+  }
+  .onto-contrast-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--green);
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .onto-contrast-header > div { padding: 10px 14px; }
+  .onto-contrast-row {
+    border-top: 1px solid var(--border);
+  }
+  .onto-contrast-label {
+    background: var(--parchment);
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-mid);
+    grid-column: 1 / -1;
+  }
+  .onto-contrast-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .onto-contrast-content > div {
+    padding: 12px 14px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+  .onto-contrast-content > div:first-child {
+    border-right: 1px solid var(--border);
+  }
+  .onto-contrast-content > div:nth-child(even) {
+    background: var(--green-pale);
+  }
+
+  /* Dietetics tab */
+  .onto-apply-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .onto-apply-grid { grid-template-columns: 1fr; } }
+  .onto-apply-item {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .onto-apply-icon { font-size: 20px; margin-bottom: 8px; }
+  .onto-apply-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .onto-apply-body {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+  .res-new-pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--green);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .res-card-new {
+    border-color: var(--green-mid);
+  }
+  .role-card-yarn {
+    background: var(--terra-pale);
+    border: 1.5px solid #D9A090;
+  }
+  .yarn-number {
+    margin-top: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--terra);
+    letter-spacing: 0.04em;
+  }
+  .res-card-yarn {
+    border: 1.5px solid #D9A090;
+    background: var(--terra-pale);
+  }
+  .res-card-yarn:hover { border-color: var(--terra); }
+  .yarn-pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--terra);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .qh-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .qh-section-label {
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+  .qh-org-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+  }
+  .qh-org-badge.qh  { background: #DDEEF8; color: #1A5C8A; }
+  .qh-org-badge.cea { background: #E8F5E4; color: #2D6B3A; }
+
+  .qh-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: all 0.18s;
+  }
+  .qh-card:hover { border-color: var(--ochre-light); background: var(--parchment); transform: translateX(3px); }
+  .qh-card-left { flex: 1; }
+  .qh-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  .qh-card-desc {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+  .qh-card-meta {
+    font-size: 12px;
+    color: var(--ink-light);
+  }
+  .qh-arrow {
+    font-size: 16px;
+    color: var(--ochre-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.15s;
+  }
+  .qh-card:hover .qh-arrow { transform: translateX(4px); }
+
+  /* ── RESOURCES ── */
+  .res-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .filter-btn:hover { border-color: var(--ochre-light); color: var(--ochre); }
+  .filter-btn.active { background: var(--ochre); border-color: var(--ochre); color: #fff; font-weight: 500; }
+
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .res-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s;
+  }
+  .res-card:hover { border-color: var(--ochre-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(160,98,42,0.1); }
+  .res-card.hidden { display: none; }
+  .res-card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .res-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .res-badge.video   { background: #EAE4F8; color: #5B45A0; }
+  .res-badge.reading { background: var(--ochre-pale); color: var(--ochre); }
+  .res-badge.org     { background: var(--green-pale); color: var(--green); }
+  .res-badge.podcast { background: var(--terra-pale); color: var(--terra); }
+  .res-topic {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .res-topic.fn   { border-color: #B5D9C5; color: var(--green); background: var(--green-pale); }
+  .res-topic.hum  { border-color: #C5BDE8; color: #5B45A0; background: #EAE4F8; }
+  .res-topic.both { border-color: var(--border); color: var(--ink-light); background: var(--sand); }
+  .res-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .res-desc { font-size: 13px; color: var(--ink-mid); line-height: 1.65; flex: 1; }
+  .res-meta { font-size: 12px; color: var(--ink-light); font-weight: 300; }
+  .res-arrow { font-size: 16px; color: var(--ochre-light); align-self: flex-end; transition: transform 0.15s; }
+  .res-card:hover .res-arrow { transform: translateX(4px); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .info-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .info-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 14px;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .info-chip:hover { border-color: var(--ochre-light); color: var(--ochre); background: var(--ochre-pale); }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre); flex-shrink: 0; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-label { font-size: 14px; color: var(--ink-light); white-space: nowrap; }
+  .progress-track {
+    flex: 1;
+    height: 8px;
+    background: var(--sand);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-mid), var(--ochre));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-pct { font-size: 14px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .roles-strip, .fourcee-grid { grid-template-columns: 1fr; }
+    .learn-flow { flex-wrap: wrap; gap: 12px; }
+    .learn-connector { display: none; }
+    .main { padding: 20px 16px 60px; }
+    .concept-grid { grid-template-columns: 1fr; }
+    .tab-btn { padding: 12px 14px; font-size: 13px; }
+  }
+  /* Kleinman questions */
+  .kleinman-q {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+  .kleinman-q:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .kleinman-q-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+  .kleinman-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .kleinman-text {
+    flex: 1;
+    font-size: 15px;
+    color: var(--ink);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .kleinman-arrow {
+    color: var(--green);
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .kleinman-q-body {
+    padding: 0 16px 16px 54px;
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ─── Case Studies ─── */
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .case-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .case-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .case-num-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    border-radius: 20px;
+    padding: 3px 10px;
+    width: fit-content;
+    letter-spacing: 0.03em;
+  }
+  .case-client-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .case-client-sub { font-size: 13px; color: var(--ink-light); margin-top: -4px; }
+  .case-summary-text { font-size: 14px; color: var(--ink-mid); line-height: 1.55; }
+  .case-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .case-chip { font-size: 12px; color: var(--green); background: var(--green-pale); border-radius: 20px; padding: 3px 10px; font-weight: 500; }
+  .case-open-btn {
+    margin-top: auto;
+    padding: 11px 16px;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: filter 0.2s;
+    text-align: left;
+  }
+  .case-open-btn:hover { filter: brightness(1.12); }
+  /* Chat UI */
+  .case-chat-wrap { display: none; }
+  .case-chat-wrap.active { display: block; }
+  .chat-back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 14px; color: var(--ink-mid);
+    cursor: pointer; font-family: 'DM Sans', sans-serif; margin-bottom: 18px;
+    transition: background 0.15s;
+  }
+  .chat-back-btn:hover { background: var(--sand); }
+  .chat-case-title { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+  .chat-brief { background: var(--green-pale); border: 1px solid var(--green-mid); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .chat-brief-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--green); user-select: none; }
+  .chat-brief-body { padding: 2px 16px 14px; font-size: 14px; color: var(--ink-mid); line-height: 1.65; }
+  .chat-messages {
+    background: var(--cream); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; min-height: 300px; max-height: 480px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 14px; margin-bottom: 12px; scroll-behavior: smooth;
+  }
+  .chat-msg { max-width: 88%; font-size: 14px; line-height: 1.7; border-radius: 14px; padding: 12px 16px; }
+  .chat-msg.tutor { align-self: flex-start; background: white; border: 1px solid var(--border); border-top-left-radius: 4px; color: var(--ink); }
+  .chat-msg.student { align-self: flex-end; background: var(--green); color: white; border-bottom-right-radius: 4px; }
+  .chat-msg.loading { align-self: flex-start; background: white; border: 1px solid var(--border); border-top-left-radius: 4px; color: var(--ink-light); font-style: italic; }
+  .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
+  .chat-input {
+    flex: 1; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--ink); background: white;
+    resize: none; line-height: 1.5; min-height: 46px; max-height: 130px;
+  }
+  .chat-input:focus { outline: none; border-color: var(--green); }
+  .chat-send-btn {
+    padding: 12px 20px; background: var(--green); color: white; border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    white-space: nowrap; transition: background 0.2s; height: 46px;
+  }
+  .chat-send-btn:hover:not(:disabled) { background: var(--green-mid); }
+  .chat-send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .chat-actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+  .chat-dl-btn {
+    padding: 8px 14px; background: none; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; color: var(--ink-mid); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 5px; transition: background 0.15s;
+  }
+  .chat-dl-btn:hover { background: var(--sand); }
+  .chat-note { font-size: 12px; color: var(--ink-light); text-align: center; margin-top: 10px; line-height: 1.5; }
+  @media(max-width:640px) {
+    .case-grid { grid-template-columns: 1fr; }
+    .chat-msg { max-width: 96%; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <svg class="header-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <circle cx="18" cy="18" r="17" fill="rgba(255,255,255,0.12)"/>
+      <path d="M18 8C12 8 8 14 8 18C8 22 12 28 18 28C24 28 28 22 28 18C28 14 24 8 18 8Z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+      <circle cx="18" cy="18" r="5" fill="rgba(255,255,255,0.7)"/>
+      <path d="M18 8V13M18 23V28M8 18H13M23 18H28" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div class="header-title">Cultural Safety in Dietetic Practice</div>
+      <div class="header-sub">DIET7103 &nbsp;·&nbsp; Workshop 4</div>
+    </div>
+  </div>
+</header>
+
+<!-- TAB BAR -->
+<nav class="tab-bar" role="navigation" aria-label="Workshop tabs">
+  <div class="tab-inner">
+    <button class="tab-btn active" onclick="switchTab('w2', this)" aria-selected="true" role="tab">Workshop 4, Part 1 — Cultural Humility &amp; Competence</button>
+    <button class="tab-btn" onclick="switchTab('w1', this)" aria-selected="false" role="tab">Workshop 4, Part 2 — First Nations Cultural Safety</button>
+    <button class="tab-btn" onclick="switchTab('res', this)" aria-selected="false" role="tab">Resources</button>
+    <button class="tab-btn" onclick="switchTab('cases', this)" aria-selected="false" role="tab">Case Studies</button>
+    <button class="tab-btn" onclick="switchTab('refs', this)" aria-selected="false" role="tab">References</button>
+  </div>
+</nav>
+
+<main class="main" role="main">
+
+  <!-- ═══════════════════════════ WORKSHOP 1 ═══════════════════════════ -->
+  <div id="w1" class="workshop-panel" role="tabpanel">
+
+    <!-- Progress -->
+    <div class="progress-bar-wrap" aria-label="Workshop progress">
+      <span class="progress-label">Your progress</span>
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill" id="w1-progress" style="width:0%"></div>
+      </div>
+      <span class="progress-pct" id="w1-pct">0%</span>
+    </div>
+
+    <!-- Acknowledgment -->
+    <div class="ack-banner" role="region" aria-label="Acknowledgment of Country">
+      <p class="ack-text">
+        We acknowledge the <strong>Traditional Custodians</strong> of this land and their continuing deep connection to Country — the land, waters, skies, and all living things. We pay our respects to Elders past, present, and emerging, and recognise that sovereignty was never ceded.
+      </p>
+    </div>
+
+    <h1 class="section-heading">First Nations Cultural Safety</h1>
+    <p class="section-subtitle">Part 2 &nbsp;·&nbsp; Click each concept card to explore its meaning</p>
+
+    <!-- Key Concepts -->
+    <p class="block-label" aria-label="Section: Key Concepts">Key Concepts</p>
+    <div class="concept-grid" role="list">
+
+      <div class="concept-card" role="listitem" tabindex="0" onclick="toggleCard(this)" onkeydown="if(event.key==='Enter')toggleCard(this)" aria-expanded="false">
+        <button class="card-toggle" aria-label="Expand Country concept">+</button>
+        <div class="card-icon green" aria-hidden="true">🌿</div>
+        <div class="card-title">Country</div>
+        <div class="card-peek">A living, breathing entity</div>
+        <div class="card-body">
+          Country is not simply land — it is a living entity that encompasses land, waters, skies, culture, community, and identity. For First Nations peoples, Country is relational: you don't just live <em>on</em> Country, you live <em>with</em> it. Healthcare interactions must recognise this holistic relationship.
+        </div>
+      </div>
+
+      <div class="concept-card" role="listitem" tabindex="0" onclick="toggleCard(this)" onkeydown="if(event.key==='Enter')toggleCard(this)" aria-expanded="false">
+        <button class="card-toggle" aria-label="Expand Cultural Safety concept">+</button>
+        <div class="card-icon ochre" aria-hidden="true">🤝</div>
+        <div class="card-title">Cultural Safety</div>
+        <div class="card-peek">Determined by the patient</div>
+        <div class="card-body">
+          Cultural safety is not something a practitioner declares — it is <strong>determined by the patient</strong>. It means the patient feels safe, respected, and free from judgement. A culturally safe environment is one where people can share their needs without fear of bias, racism, or having their identity dismissed.
+        </div>
+      </div>
+
+      <div class="concept-card" role="listitem" tabindex="0" onclick="toggleCard(this)" onkeydown="if(event.key==='Enter')toggleCard(this)" aria-expanded="false">
+        <button class="card-toggle" aria-label="Expand Holistic Health concept">+</button>
+        <div class="card-icon terra" aria-hidden="true">⭕</div>
+        <div class="card-title">Holistic Health</div>
+        <div class="card-peek">Seven interconnected dimensions</div>
+        <div class="card-body">
+          Indigenous holistic health extends well beyond the biomedical model. It incorporates <strong>spiritual, emotional, family, community, cultural, and physical</strong> dimensions — all interconnected. As a dietitian, addressing nutrition without acknowledging these dimensions misses the whole person.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quote -->
+    <div class="quote-callout" role="note">
+      <strong>"Cultural safety is determined by the recipient of care."</strong><br>
+      The patient — not the clinician — decides whether an interaction is safe. Our role is to create the conditions where that safety is possible.
+    </div>
+
+    <!-- Factors -->
+    <p class="block-label">Factors affecting health engagement</p>
+    <div class="accordion" role="list">
+
+      <div class="acc-item" role="listitem">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot ochre" aria-hidden="true"></span>
+          <span class="acc-label">Historical trauma &amp; colonial legacy</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Policies of child removal (Stolen Generations) created deep, intergenerational trauma and mistrust of government-run services.</li>
+            <li>Discriminatory hospital experiences and segregated care have left lasting impacts on willingness to engage with healthcare systems.</li>
+            <li>Understanding this history is not optional — it directly explains why a patient may disengage from care.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot terra" aria-hidden="true"></span>
+          <span class="acc-label">Mandatory identification &amp; patient identification</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <p>Asking about First Nations identity ensures access to appropriate, culturally safe services. However, the <em>way</em> you ask matters enormously:</p>
+          <ul style="margin-top:8px">
+            <li>Use a sensitive, private, and non-judgemental approach.</li>
+            <li>Explain <em>why</em> you are asking and how it helps connect the person to better support.</li>
+            <li>Never make assumptions based on appearance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot green" aria-hidden="true"></span>
+          <span class="acc-label">Stereotyping, racism &amp; unconscious bias</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <p>Stereotyping — even well-intentioned — degrades the quality of care and can deter patients from returning. Racism (both overt and systemic) directly influences health outcomes.</p>
+          <ul style="margin-top:8px">
+            <li>Examine your own assumptions before every interaction.</li>
+            <li>Avoid making food or lifestyle assumptions based on cultural background.</li>
+            <li>Call out racist behaviour when safe to do so.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item" role="listitem">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot ochre" aria-hidden="true"></span>
+          <span class="acc-label">Family &amp; community centrality</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <p>In many First Nations communities, decisions are made collectively, not individually. Family members and Elders play key roles in health discussions.</p>
+          <ul style="margin-top:8px">
+            <li>Invite family to be present when the patient wishes.</li>
+            <li>Direct dietary advice to the family unit, not just the individual.</li>
+            <li>Recognise that "non-compliance" may reflect family food-sharing values, not disinterest in health.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Roles -->
+    <p class="block-label">Key support roles</p>
+    <div class="roles-strip roles-strip-3">
+      <div class="role-card">
+        <div class="role-title">Aboriginal Service Development Workers (ASDWs)</div>
+        <div class="role-desc">Cultural advocates who interpret worldview, bridge communication, and support patients throughout their healthcare journey. Their involvement can transform patient experience and outcomes.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-title">Indigenous Liaison Officers (ILOs)</div>
+        <div class="role-desc">Connect First Nations patients and families to culturally appropriate services, navigate hospital systems, and act as trusted intermediaries between patients and clinical staff.</div>
+      </div>
+      <div class="role-card role-card-yarn">
+        <div class="role-title">13YARN — Crisis Support Line</div>
+        <div class="role-desc">A 24/7 national crisis support line staffed by First Nations workers. If a patient is in distress, share this number: <strong>13 92 76</strong>. Knowing it exists — and passing it on — is itself an act of cultural safety.</div>
+        <div class="yarn-number" aria-label="13YARN phone number">13 92 76</div>
+      </div>
+    </div>
+
+    <!-- Clinical Education -->
+    <p class="block-label">Cultural safety in clinical education</p>
+
+    <div class="clin-intro">
+      Clinical placements are where cultural safety moves from theory into practice. As a student dietitian, you will encounter First Nations patients in hospitals, community health centres, and remote settings. What you do — and don't do — in those moments matters.
+    </div>
+
+    <div class="clin-grid">
+
+      <div class="clin-card">
+        <div class="clin-card-header">
+          <div class="clin-icon" style="background:var(--green-pale)" aria-hidden="true">🏥</div>
+          <div class="clin-card-title">On placement</div>
+        </div>
+        <ul class="clin-list">
+          <li>Introduce yourself clearly — include your role as a student and ask how the patient would like to be addressed.</li>
+          <li>Never assume — don't make food, lifestyle, or health belief assumptions before listening.</li>
+          <li>Ask your supervising dietitian about local protocols for working with First Nations patients before beginning assessments.</li>
+          <li>If an ASDW or ILO is available, request their involvement early — not as a last resort.</li>
+          <li>Observe and reflect: notice how cultural safety is — or isn't — practised by the team around you.</li>
+        </ul>
+      </div>
+
+      <div class="clin-card">
+        <div class="clin-card-header">
+          <div class="clin-icon" style="background:var(--ochre-pale)" aria-hidden="true">📋</div>
+          <div class="clin-card-title">Documentation &amp; care planning</div>
+        </div>
+        <ul class="clin-list">
+          <li>Record cultural needs, food preferences, and family involvement respectfully and accurately in notes.</li>
+          <li>Avoid deficit language — describe what the patient <em>can</em> do and what supports them, not just barriers.</li>
+          <li>Flag cultural considerations clearly in handover and care plans so they aren't lost between staff.</li>
+          <li>Check whether the patient has identified as Aboriginal or Torres Strait Islander in their record — if not recorded, ask sensitively and explain why it matters.</li>
+          <li>Dietary plans should incorporate traditional and preferred foods where clinically appropriate.</li>
+        </ul>
+      </div>
+
+      <div class="clin-card">
+        <div class="clin-card-header">
+          <div class="clin-icon" style="background:var(--terra-pale)" aria-hidden="true">🗣️</div>
+          <div class="clin-card-title">Supervision &amp; feedback</div>
+        </div>
+        <ul class="clin-list">
+          <li>Debrief with your supervisor after culturally complex encounters — reflect on what went well and what you'd do differently.</li>
+          <li>Raise concerns if you witness culturally unsafe practice — speak to your supervisor or clinical educator.</li>
+          <li>Ask for feedback specifically on your cultural communication, not just clinical skills.</li>
+          <li>If you make a cultural misstep, acknowledge it genuinely, learn from it, and move forward — don't over-apologise or over-explain.</li>
+        </ul>
+      </div>
+
+      <div class="clin-card">
+        <div class="clin-card-header">
+          <div class="clin-icon" style="background:#EAE4F8" aria-hidden="true">👥</div>
+          <div class="clin-card-title">Working with the clinical team</div>
+        </div>
+        <ul class="clin-list">
+          <li>Advocate for the patient's cultural needs in multidisciplinary team meetings — you may be the only person who has spoken with them about food and culture.</li>
+          <li>If a colleague makes a stereotyped comment, address it calmly — "I'm not sure that's fair to assume" is a starting point.</li>
+          <li>Build relationships with ASDWs and ILOs as key members of the team, not optional add-ons.</li>
+          <li>Share what you learn about a patient's cultural context with the team (with consent) — cultural knowledge should not sit in silos.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="clin-callout" role="note">
+      <div class="clin-callout-icon" aria-hidden="true">💬</div>
+      <div>
+        <strong>A note on discomfort:</strong> You will feel unsure, make mistakes, and sometimes not know what to do. This is normal and expected. Cultural safety is not about perfection — it is about staying curious, taking responsibility, and continuing to grow. The willingness to sit with discomfort and learn from it is itself a practice of humility.
+      </div>
+    </div>
+
+    <!-- QH & CEA Resources -->
+    <p class="block-label">Queensland Health &amp; clinical education resources</p>
+
+    <div class="qh-grid">
+
+      <div class="qh-section-label">
+        <span class="qh-org-badge qh">Queensland Health</span>
+      </div>
+
+      <a href="https://www.health.qld.gov.au/public-health/groups/atsihealth/cultural-capability" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">Aboriginal &amp; Torres Strait Islander Cultural Capability Framework</div>
+          <div class="qh-card-desc">Queensland Health's framework for building cultural capability across the health workforce — from foundational awareness through to advanced practice. Directly relevant to your placement context and professional obligations as a student dietitian in Queensland.</div>
+          <div class="qh-card-meta">health.qld.gov.au &nbsp;·&nbsp; Free</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.health.qld.gov.au/public-health/groups/atsihealth" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">Connecting Care to Country Strategy</div>
+          <div class="qh-card-desc">Queensland Health's strategic framework for improving health outcomes for Aboriginal and Torres Strait Islander peoples. Outlines how cultural safety is embedded across service delivery, workforce, and governance — providing crucial context for your clinical interactions.</div>
+          <div class="qh-card-meta">health.qld.gov.au &nbsp;·&nbsp; Free PDF</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+      <a href="https://www.health.qld.gov.au/public-health/groups/atsihealth/cultural-capability" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">QH Cultural Capability</div>
+          <div class="qh-card-desc">Queensland Health's Cultural Capability hub, including links to mandatory iLearn modules available free to students on placement. Covers First Nations history, health, and culturally safe communication — complete before placement.</div>
+          <div class="qh-card-meta">health.qld.gov.au &nbsp;·&nbsp; Free &nbsp;·&nbsp; Self-paced online</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.health.qld.gov.au/public-health/groups/atsihealth" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">Aboriginal &amp; Torres Strait Islander Liaison Officer Directory</div>
+          <div class="qh-card-desc">Find the ILO team at your Queensland Health placement site. Knowing who to contact before you arrive on placement enables faster, more effective collaboration when cultural support is needed for a patient.</div>
+          <div class="qh-card-meta">health.qld.gov.au &nbsp;·&nbsp; Free</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+      <a href="https://www.racp.edu.au/about/indigenous-equity-and-cultural-safety/cultural-safety" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">RACP — Culturally Safe Supervision Hub</div>
+          <div class="qh-card-desc">The Royal Australasian College of Physicians' freely accessible Culturally Safe Supervision Hub includes webinars, video interviews, case-based scenarios, and a resource library. Developed with First Nations trainees and supervisors, it is directly applicable to understanding what culturally safe supervision looks and feels like from both sides of the relationship.</div>
+          <div class="qh-card-meta">racp.edu.au &nbsp;·&nbsp; Free &nbsp;·&nbsp; Guest access available</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://healthinfonet.ecu.edu.au/key-resources/health-professionals/cultural-safety-for-health-professionals/" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">Australian Indigenous HealthInfoNet — Cultural Safety Portal</div>
+          <div class="qh-card-desc">A comprehensive, freely accessible portal of cultural safety publications, policies, resources, programs, and organisations for all registered health professions. Developed with First Peoples Health Unit at Griffith University and maintained by ECU, this is one of the most comprehensive student and clinician resources available for cultural safety in Aboriginal and Torres Strait Islander health.</div>
+          <div class="qh-card-meta">healthinfonet.ecu.edu.au &nbsp;·&nbsp; Free</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+
+      <a href="https://iaha.com.au/" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">Indigenous Allied Health Australia (IAHA)</div>
+          <div class="qh-card-desc">The national peak body for Aboriginal and Torres Strait Islander allied health professionals. IAHA's freely available <em>Cultural Responsiveness in Action</em> Framework (2019) is built around an Indigenous worldview of "knowing, being and doing" — directly applicable to dietetic practice. Includes training pathways, position statements, and workforce development resources relevant to all allied health students.</div>
+          <div class="qh-card-meta">iaha.com.au &nbsp;·&nbsp; Free resources &nbsp;·&nbsp; Framework downloadable on request</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://iaha.com.au/workforce-support/training-and-development/cultural-responsiveness-in-action-training/" target="_blank" rel="noopener" class="qh-card">
+        <div class="qh-card-left">
+          <div class="qh-card-title">IAHA — Cultural Responsiveness in Action Framework</div>
+          <div class="qh-card-desc">IAHA's evidence-based Cultural Responsiveness Framework, revised 2019, provides a structured approach to cultural safety through six capabilities centred on self-awareness, respect, responsibility, and accountability. Unlike generic cultural awareness training, this framework is Aboriginal and Torres Strait Islander-led, action-oriented, and specific to allied health practice. Email <span class="__cf_email__" data-cfemail="a4c5c0c9cdcae4cdc5ccc58ac7cbc98ac5d1">[email&#160;protected]</span> to request a PDF copy.</div>
+          <div class="qh-card-meta">iaha.com.au &nbsp;·&nbsp; Free &nbsp;·&nbsp; PDF available on request</div>
+        </div>
+        <div class="qh-arrow" aria-hidden="true">→</div>
+      </a>
+    </div>
+
+    <!-- Recommended Resources -->
+    <p class="block-label">Recommended resources</p>
+    <div class="info-chips" role="list">
+      <a href="#" class="info-chip" role="listitem"><span class="chip-dot" aria-hidden="true"></span>"You Can't Ask That" — ABC Series</a>
+      <a href="#" class="info-chip" role="listitem"><span class="chip-dot" aria-hidden="true"></span>UQ First Nations Health Podcasts</a>
+      <a href="#" class="info-chip" role="listitem"><span class="chip-dot" aria-hidden="true"></span>Stolen Generations — AIATSIS</a>
+    </div>
+
+    <!-- Knowledge check -->
+    <p class="block-label" style="margin-top:32px">Knowledge check</p>
+    <ul class="checklist" role="list" id="w1-checklist">
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can explain why cultural safety is determined by the patient, not the clinician.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I understand the significance of Country beyond just land.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can describe at least three historical factors that affect health engagement.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I understand the holistic model of Indigenous health (spiritual, emotional, family, community, cultural, physical).</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I know the difference between an ASDW and an ILO, and when to involve each.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can describe at least two ways to practise cultural safety during a clinical placement.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I understand how to document cultural needs respectfully in care plans and clinical notes.</span></li>
+    </ul>
+
+  </div><!-- end w1 -->
+
+
+  <!-- ═══════════════════════════ WORKSHOP 2 ═══════════════════════════ -->
+  <div id="w2" class="workshop-panel active" role="tabpanel">
+
+    <!-- Progress -->
+    <div class="progress-bar-wrap" aria-label="Workshop 2 progress">
+      <span class="progress-label">Your progress</span>
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-fill" id="w2-progress" style="width:0%"></div>
+      </div>
+      <span class="progress-pct" id="w2-pct">0%</span>
+    </div>
+
+    <h1 class="section-heading">Cultural Humility &amp; Cultural Competence</h1>
+    <p class="section-subtitle">Part 1 &nbsp;·&nbsp; Explore the frameworks that guide culturally responsive practice</p>
+
+    <!-- Ontology & Epistemology -->
+    <p class="block-label">Foundational concepts</p>
+
+    <div class="onto-card" id="onto-card">
+      <div class="onto-header" onclick="toggleOnto()" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleOnto()" role="button" aria-expanded="false" aria-controls="onto-body">
+        <div class="onto-header-left">
+          <div class="onto-icon" aria-hidden="true">🧠</div>
+          <div>
+            <div class="onto-title">Ontology &amp; Epistemology</div>
+            <div class="onto-peek">Why the way we <em>know</em> shapes the care we give</div>
+          </div>
+        </div>
+        <button class="onto-toggle" aria-label="Expand ontology and epistemology card">+</button>
+      </div>
+
+      <div class="onto-body" id="onto-body" hidden>
+
+        <!-- Tab bar -->
+        <div class="onto-tabs" role="tablist">
+          <button class="onto-tab active" onclick="switchOntoTab('def', this)" role="tab" aria-selected="true">What are they?</button>
+          <button class="onto-tab" onclick="switchOntoTab('contrast', this)" role="tab" aria-selected="false">Ways of knowing</button>
+          <button class="onto-tab" onclick="switchOntoTab('dietetics', this)" role="tab" aria-selected="false">In dietetics</button>
+          <button class="onto-tab" onclick="switchOntoTab('example', this)" role="tab" aria-selected="false">An example</button>
+        </div>
+
+        <!-- Tab: Definitions -->
+        <div class="onto-tab-panel" id="onto-def">
+          <div class="onto-def-grid">
+            <div class="onto-def-card">
+              <div class="onto-def-label">Ontology</div>
+              <div class="onto-def-body">The study of <strong>what exists</strong> — the nature of reality, being, and the world. Ontology asks: <em>What is real? What kinds of things exist? How do they relate?</em></div>
+              <div class="onto-def-example">In health: does the body exist as a biological machine to be fixed, or as part of a web of relationships, spirit, land, and community? Both are ontological positions.</div>
+            </div>
+            <div class="onto-def-card">
+              <div class="onto-def-label">Epistemology</div>
+              <div class="onto-def-body">The study of <strong>how we know what we know</strong> — the nature, sources, and limits of knowledge. Epistemology asks: <em>What counts as evidence? Whose knowledge is valid? How is knowledge produced?</em></div>
+              <div class="onto-def-example">In health: is randomised controlled trial evidence the only legitimate basis for dietary advice, or do lived experience, community knowledge, and ancestral practice also constitute valid knowing?</div>
+            </div>
+          </div>
+          <div style="margin:18px 0 4px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-light)">A real example — your educator</div>
+          <div class="onto-def-grid">
+            <div class="onto-def-card" style="border-top:3px solid var(--green)">
+              <div class="onto-def-label" style="color:var(--green)">Ontology</div>
+              <div class="onto-def-body"><em>What does your educator believe exists and is real?</em></div>
+              <div class="onto-def-example" style="margin-top:8px">Health is fundamentally <strong>relational and social</strong>, not merely biological. Food exists not just as nutrients but as <strong>culture, identity, memory, and connection</strong>. Place is real and meaningful — <em>where</em> knowledge comes from matters, not just what it says. This shows up in the inclusion of local Sunshine Coast and Brisbane/Meanjin-specific resources: Aunty Dale Chapman's shop, the Turrbal Our Story page, the Meanjin essay. These reflect a belief that situated, local knowledge is as real and as valuable as universal clinical evidence.</div>
+            </div>
+            <div class="onto-def-card" style="border-top:3px solid var(--ochre)">
+              <div class="onto-def-label" style="color:var(--ochre)">Epistemology</div>
+              <div class="onto-def-body"><em>How does your educator believe we come to know things?</em></div>
+              <div class="onto-def-example" style="margin-top:8px">Knowledge is built through <strong>dialogue and questioning</strong>, not just transmission — which is exactly why this workshop uses a Socratic AI tutor rather than a quiz. Multiple sources count as valid knowledge: academic frameworks (Kleinman, Campinha-Bacote) sit alongside Elder voices, community organisations, and First Nations food businesses. Students learn best when they <strong>encounter real complexity</strong> — hence case studies with messy, culturally layered clients rather than clean textbook scenarios.</div>
+            </div>
+          </div>
+          <div style="margin:14px 0 18px;padding:13px 16px;background:var(--green-pale);border-radius:10px;border-left:3px solid var(--green);font-size:14px;color:var(--ink-mid);line-height:1.7">
+            <strong>The key insight:</strong> Your educator's ontology (health is relational, place matters) directly shapes their epistemology (we learn through dialogue with real complexity, from multiple sources). The two cannot be separated. Now ask yourself — what are <em>your</em> ontological and epistemological assumptions, and how might they shape the kind of dietitian you become?
+          </div>
+
+          <div class="onto-why-box">
+            <div class="onto-why-title">Why this matters for practice</div>
+            <p>Every healthcare interaction is shaped by assumptions about reality and knowledge — usually invisible ones. When a clinician and a patient hold different ontologies, they may be talking about fundamentally different things even when using the same words. Recognising this is the foundation of cultural humility.</p>
+          </div>
+        </div>
+
+        <!-- Tab: Contrast -->
+        <div class="onto-tab-panel" id="onto-contrast" hidden>
+          <div class="onto-contrast-table" role="table" aria-label="Western vs First Nations ways of knowing">
+            <div class="onto-contrast-header" role="row">
+              <div role="columnheader">Western Biomedical</div>
+              <div role="columnheader">First Nations</div>
+            </div>
+            <div class="onto-contrast-row" role="row">
+              <div class="onto-contrast-label" colspan="2">Ontology — what is the body?</div>
+            </div>
+            <div class="onto-contrast-row onto-contrast-content" role="row">
+              <div role="cell">A physical, biological system. Health = absence of disease. The individual body is the primary unit of care.</div>
+              <div role="cell">A relational, holistic entity. Health = balance across spiritual, emotional, physical, family, community, and cultural dimensions. The individual cannot be separated from Country, kin, and spirit.</div>
+            </div>
+            <div class="onto-contrast-row" role="row">
+              <div class="onto-contrast-label" colspan="2">Epistemology — what counts as knowledge?</div>
+            </div>
+            <div class="onto-contrast-row onto-contrast-content" role="row">
+              <div role="cell">Scientific method, peer-reviewed evidence, randomised controlled trials, reproducibility. Knowledge is universal and context-independent.</div>
+              <div role="cell">Ancestral knowledge, Elder wisdom, lived experience, story, Country, ceremony, and kinship. Knowledge is relational, contextual, and held collectively across generations.</div>
+            </div>
+            <div class="onto-contrast-row" role="row">
+              <div class="onto-contrast-label" colspan="2">Time and causality</div>
+            </div>
+            <div class="onto-contrast-row onto-contrast-content" role="row">
+              <div role="cell">Linear: cause precedes effect. Focus on present illness and future prognosis.</div>
+              <div role="cell">Circular and continuous: past, present, and future are interconnected. The Dreaming is not historical — it is ongoing and alive in the present.</div>
+            </div>
+            <div class="onto-contrast-row" role="row">
+              <div class="onto-contrast-label" colspan="2">Relationship to Country</div>
+            </div>
+            <div class="onto-contrast-row onto-contrast-content" role="row">
+              <div role="cell">Land as resource or environment. Health policy may acknowledge social determinants, but Country is rarely considered a health determinant.</div>
+              <div role="cell">Country is inseparable from health and identity. Displacement from Country is a direct cause of ill health. Connection to Country heals.</div>
+            </div>
+          </div>
+          <div class="onto-why-box" style="margin-top:16px">
+            <div class="onto-why-title">Key insight for students</div>
+            <p>Neither worldview is wrong — they are different ways of understanding a complex reality. The problem arises when one is treated as universal and the other is dismissed as unscientific. In clinical settings, the Western biomedical worldview is structurally dominant. Recognising this power imbalance is an act of cultural safety.</p>
+          </div>
+        </div>
+
+        <!-- Tab: Dietetics application -->
+        <div class="onto-tab-panel" id="onto-dietetics" hidden>
+          <p style="font-size:15px;color:var(--ink-mid);margin-bottom:16px;line-height:1.65">Ontological and epistemological differences show up directly in dietetic consultations — often without either party realising it.</p>
+          <div class="onto-apply-grid">
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">🥘</div>
+              <div class="onto-apply-title">Food as medicine vs food as culture</div>
+              <div class="onto-apply-body">Biomedical epistemology classifies foods by macronutrients, glycaemic index, and clinical outcomes. First Nations and many CALD epistemologies understand food as carrying cultural memory, spiritual significance, and relational meaning. When a patient declines a "healthy" substitute for a traditional food, they may be asserting an ontological claim about what food actually <em>is</em>.</div>
+            </div>
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">📊</div>
+              <div class="onto-apply-title">What counts as evidence?</div>
+              <div class="onto-apply-body">A patient may report that they feel well when eating particular traditional foods, or that certain foods are connected to ceremony and healing. Western clinical epistemology may not have an RCT to validate this — but that does not make the knowledge less real or less valid. Asking "why do you believe that?" is very different from asking "tell me more about what that food means to you."</div>
+            </div>
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+              <div class="onto-apply-title">The individual vs the collective</div>
+              <div class="onto-apply-body">Dietetics is typically framed around individual behaviour change — personal dietary goals, personal motivation, personal adherence. In many First Nations and collectivist cultural worldviews, food decisions are made relationally: what is cooked reflects obligations to family, community, and ceremony. Framing dietary advice as individual choice may be ontologically incompatible with how a patient understands their own agency.</div>
+            </div>
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">🌿</div>
+              <div class="onto-apply-title">Traditional & bush foods</div>
+              <div class="onto-apply-body">Bush tucker — kangaroo, emu, witchetty grubs, bush tomatoes, native greens — carries profound ontological meaning. It is not simply an alternative protein source. It connects the patient to Country, kin, and ancestral knowledge. When incorporating traditional foods into a care plan, approach from curiosity about meaning and relationship, not just nutritional composition.</div>
+            </div>
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">🗣️</div>
+              <div class="onto-apply-title">Whose expertise counts?</div>
+              <div class="onto-apply-body">In the consultation room, the dietitian holds institutional epistemic authority — the degree, the evidence base, the clinical role. But the patient holds deep expertise in their own body, their community's food knowledge, and what has worked across generations. Cultural humility requires genuinely redistributing epistemic authority in the consultation — listening to know, not just to respond.</div>
+            </div>
+            <div class="onto-apply-item">
+              <div class="onto-apply-icon" aria-hidden="true">⚠️</div>
+              <div class="onto-apply-title">When worldviews conflict</div>
+              <div class="onto-apply-body">A patient with type 2 diabetes may refuse to restrict certain foods because of their ceremonial role. A patient from a collectivist culture may not follow an individual meal plan because food sharing is a moral obligation. Rather than labelling this "non-compliance," ask: whose ontology is determining what counts as the "right" choice here? Start from the patient's worldview, then find points of connection.</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="onto-tab-panel" id="onto-example" hidden>
+          <p style="font-size:15px;color:var(--ink-mid);margin-bottom:18px;line-height:1.65">Everyone has an ontology and epistemology — including your educator. Here's a real example, drawn from the way this very workshop was designed.</p>
+
+          <div class="onto-def-grid">
+            <div class="onto-def-card" style="border-top:3px solid var(--green)">
+              <div class="onto-def-label" style="color:var(--green)">Ontology</div>
+              <div class="onto-def-body"><em>What does your educator believe exists and is real?</em></div>
+              <div class="onto-def-example" style="margin-top:10px">
+                Health is fundamentally <strong>relational and social</strong>, not merely biological. Food exists not just as nutrients but as <strong>culture, identity, memory, and connection</strong>. Place is real and meaningful — where knowledge comes from matters, not just what it says. This shows up in the inclusion of local Sunshine Coast and Brisbane/Meanjin-specific resources: Aunty Dale Chapman's shop, the Turrbal Our Story page, the Meanjin essay. These aren't just additions — they reflect a belief that <em>situated, local knowledge</em> is as real and as valuable as universal clinical evidence.
+              </div>
+            </div>
+            <div class="onto-def-card" style="border-top:3px solid var(--ochre)">
+              <div class="onto-def-label" style="color:var(--ochre)">Epistemology</div>
+              <div class="onto-def-body"><em>How does your educator believe we come to know things?</em></div>
+              <div class="onto-def-example" style="margin-top:10px">
+                Knowledge is built through <strong>dialogue and questioning</strong>, not just transmission — which is exactly why this workshop uses a Socratic AI tutor rather than a quiz or a lecture. Multiple sources count as valid knowledge: academic frameworks (Kleinman, Campinha-Bacote) sit alongside Elder voices, community organisations, and First Nations food businesses. Students learn best when they <strong>encounter real complexity</strong> — hence case studies with messy, culturally layered clients rather than clean textbook scenarios.
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px;padding:14px 16px;background:var(--green-pale);border-radius:10px;border-left:3px solid var(--green);font-size:14px;color:var(--ink-mid);line-height:1.7">
+            <strong>The key insight:</strong> Your educator's ontology (health is relational, place matters) directly shapes their epistemology (we learn through dialogue with real complexity, from multiple sources). The two cannot be separated. Now ask yourself — what are <em>your</em> ontological and epistemological assumptions, and how might they shape the kind of dietitian you become?
+          </div>
+        </div>
+      </div><!-- end onto-body -->
+    </div><!-- end onto-card -->
+
+    <!-- Humility vs Competence -->
+    <p class="block-label" style="margin-top:28px">Humility vs competence — what's the difference?</p>
+    <div class="concept-grid">
+
+      <div class="concept-card" tabindex="0" onclick="toggleCard(this)" onkeydown="if(event.key==='Enter')toggleCard(this)" aria-expanded="false">
+        <button class="card-toggle" aria-label="Expand Cultural Humility">+</button>
+        <div class="card-icon green" aria-hidden="true">🪞</div>
+        <div class="card-title">Cultural Humility</div>
+        <div class="card-peek">A lifelong journey, not a destination</div>
+        <div class="card-body">
+          Cultural humility is a <strong>process</strong>, not a product. It involves ongoing self-reflection, genuine curiosity about others' experiences, and a willingness to recognise and address power imbalances in the practitioner-patient relationship. It's about what <em>you</em> do and how <em>you</em> show up — indefinitely.
+        </div>
+      </div>
+
+      <div class="concept-card" tabindex="0" onclick="toggleCard(this)" onkeydown="if(event.key==='Enter')toggleCard(this)" aria-expanded="false">
+        <button class="card-toggle" aria-label="Expand Cultural Competence">+</button>
+        <div class="card-icon ochre" aria-hidden="true">📐</div>
+        <div class="card-title">Cultural Competence</div>
+        <div class="card-peek">A continuum, not an endpoint</div>
+        <div class="card-body">
+          Cultural competence is a <strong>continuum</strong> of knowledge, skills, attitudes, and awareness. Campinha-Bacote's ASKED model provides a practical framework. Importantly, you never "arrive" at full competence — the goal is to keep growing. Competence without humility risks becoming cultural arrogance.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Cultural Self-Awareness -->
+    <p class="block-label">Cultural self-awareness</p>
+    <div class="framework-container" style="border-left:4px solid var(--ochre);background:var(--ochre-pale)">
+      <div class="framework-header" style="background:var(--ochre-pale)">
+        <span class="framework-title" style="color:var(--ochre)">🪞 Starting with yourself</span>
+        <span class="framework-tag">Kittler, Sucher &amp; Nahikian-Nelms, 2017</span>
+      </div>
+      <div style="padding:20px">
+        <p style="margin:0 0 14px;font-size:15px;color:var(--ink-mid);line-height:1.7"><em>"You cannot work cross-culturally unless you first understand your own cultural lens. Without this, we automatically universalise our own worldview — a form of ethnocentrism."</em></p>
+        <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--ink-mid);line-height:1.65">
+          <li>Every practitioner belongs to a culture — including the culture of biomedicine, which has its own unexamined assumptions about bodies, food, and health.</li>
+          <li>Clients may hold <strong>spiritual, relational, ancestral, or community-based</strong> explanations of health that are equally valid — and often more meaningful to them than a clinical diagnosis.</li>
+          <li>Expect to feel <strong>discomfort</strong> when your worldview is challenged. That discomfort is the signal that learning is happening.</li>
+          <li>Self-awareness does not make you neutral. It makes you <strong>less likely to mistake your perspective for a universal truth</strong>.</li>
+        </ul>
+        <div style="margin-top:16px;padding:12px 16px;background:white;border-radius:8px;font-size:14px;color:var(--ink-mid);border:1px solid var(--border)">
+          <strong>Reflective prompt:</strong> What cultural messages shaped your relationship with food growing up? How might those assumptions show up in a consultation with someone whose food world looks very different from yours?
+        </div>
+      </div>
+    </div>
+
+    <!-- ASKED Model -->
+    <p class="block-label">The ASKED Model (Campinha-Bacote)</p>
+    <div class="framework-container" role="region" aria-label="ASKED Model interactive">
+      <div class="framework-header">
+        <span class="framework-title">ASKED — Cultural Competence Framework</span>
+        <span class="framework-tag">Click a letter</span>
+      </div>
+      <div class="model-letters" role="group" aria-label="ASKED letters">
+        <button class="letter-btn" onclick="showAsked('A', this)" aria-pressed="false">A</button>
+        <button class="letter-btn" onclick="showAsked('S', this)" aria-pressed="false">S</button>
+        <button class="letter-btn" onclick="showAsked('K', this)" aria-pressed="false">K</button>
+        <button class="letter-btn" onclick="showAsked('E', this)" aria-pressed="false">E</button>
+        <button class="letter-btn" onclick="showAsked('D', this)" aria-pressed="false">D</button>
+      </div>
+      <div class="model-detail" id="asked-detail">
+        <div class="model-word" id="asked-word" style="color:var(--ink-light);font-size:16px;font-family:'DM Sans',sans-serif;font-weight:300">Select a letter above to explore the ASKED model</div>
+      </div>
+    </div>
+
+    <!-- 4 Cs -->
+    <p class="block-label">4 Cs of Culture (Assessment Framework)</p>
+    <div class="framework-container" role="region" aria-label="4 Cs framework">
+      <div class="framework-header">
+        <span class="framework-title">4 Cs — Cultural Assessment in Practice</span>
+        <span class="framework-tag">For clinical encounters</span>
+      </div>
+      <div class="fourcee-grid" role="list">
+        <div class="cee-card" role="listitem" tabindex="0">
+          <div class="cee-letter" aria-hidden="true">C</div>
+          <div class="cee-word">Call</div>
+          <div class="cee-body">What does the patient call their problem? What name or meaning do they give to their symptoms or condition?</div>
+        </div>
+        <div class="cee-card" role="listitem" tabindex="0">
+          <div class="cee-letter" aria-hidden="true">C</div>
+          <div class="cee-word">Cause</div>
+          <div class="cee-body">What does the patient believe caused their problem? Understanding their causal framework shapes how advice is received.</div>
+        </div>
+        <div class="cee-card" role="listitem" tabindex="0">
+          <div class="cee-letter" aria-hidden="true">C</div>
+          <div class="cee-word">Cope</div>
+          <div class="cee-body">How has the patient been coping? What remedies, practices, or support systems have they been using?</div>
+        </div>
+        <div class="cee-card" role="listitem" tabindex="0">
+          <div class="cee-letter" aria-hidden="true">C</div>
+          <div class="cee-word">Concerns</div>
+          <div class="cee-body">What are the patient's primary concerns and fears? What outcome matters most to them?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEARN Model -->
+    <p class="block-label">LEARN Model — Cross-Cultural Communication</p>
+    <div class="framework-container" role="region" aria-label="LEARN Model interactive">
+      <div class="framework-header">
+        <span class="framework-title">LEARN — Guiding Cross-Cultural Conversations</span>
+        <span class="framework-tag">Click each step</span>
+      </div>
+      <div class="learn-flow" role="list">
+        <div class="learn-step" role="listitem" onclick="showLearn('L', this)" tabindex="0" onkeydown="if(event.key==='Enter')showLearn('L',this)" aria-pressed="false">
+          <div class="learn-circle l" aria-hidden="true">L</div>
+          <div class="learn-word">Listen</div>
+          <div class="learn-sub">Actively &amp; openly</div>
+        </div>
+        <div class="learn-connector" aria-hidden="true"><svg width="24" height="10"><path d="M0 5 L20 5" stroke="var(--border)" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/><defs><marker id="arr2" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L6 4L1 7" fill="none" stroke="var(--border)" stroke-width="1.5"/></marker></defs></svg></div>
+        <div class="learn-step" role="listitem" onclick="showLearn('E', this)" tabindex="0" onkeydown="if(event.key==='Enter')showLearn('E',this)" aria-pressed="false">
+          <div class="learn-circle e" aria-hidden="true">E</div>
+          <div class="learn-word">Explain</div>
+          <div class="learn-sub">Your perspective</div>
+        </div>
+        <div class="learn-connector" aria-hidden="true"><svg width="24" height="10"><path d="M0 5 L20 5" stroke="var(--border)" stroke-width="1.5" fill="none" marker-end="url(#arr3)"/><defs><marker id="arr3" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L6 4L1 7" fill="none" stroke="var(--border)" stroke-width="1.5"/></marker></defs></svg></div>
+        <div class="learn-step" role="listitem" onclick="showLearn('A', this)" tabindex="0" onkeydown="if(event.key==='Enter')showLearn('A',this)" aria-pressed="false">
+          <div class="learn-circle a" aria-hidden="true">A</div>
+          <div class="learn-word">Acknowledge</div>
+          <div class="learn-sub">Similarities &amp; differences</div>
+        </div>
+        <div class="learn-connector" aria-hidden="true"><svg width="24" height="10"><path d="M0 5 L20 5" stroke="var(--border)" stroke-width="1.5" fill="none" marker-end="url(#arr4)"/><defs><marker id="arr4" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L6 4L1 7" fill="none" stroke="var(--border)" stroke-width="1.5"/></marker></defs></svg></div>
+        <div class="learn-step" role="listitem" onclick="showLearn('R', this)" tabindex="0" onkeydown="if(event.key==='Enter')showLearn('R',this)" aria-pressed="false">
+          <div class="learn-circle r" aria-hidden="true">R</div>
+          <div class="learn-word">Recommend</div>
+          <div class="learn-sub">With cultural context</div>
+        </div>
+        <div class="learn-connector" aria-hidden="true"><svg width="24" height="10"><path d="M0 5 L20 5" stroke="var(--border)" stroke-width="1.5" fill="none" marker-end="url(#arr5)"/><defs><marker id="arr5" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L6 4L1 7" fill="none" stroke="var(--border)" stroke-width="1.5"/></marker></defs></svg></div>
+        <div class="learn-step" role="listitem" onclick="showLearn('N', this)" tabindex="0" onkeydown="if(event.key==='Enter')showLearn('N',this)" aria-pressed="false">
+          <div class="learn-circle n" aria-hidden="true">N</div>
+          <div class="learn-word">Negotiate</div>
+          <div class="learn-sub">Collaborative plan</div>
+        </div>
+      </div>
+      <div class="learn-detail" id="learn-detail" aria-live="polite">
+        <div class="learn-detail-title">Select a step above to explore the LEARN model</div>
+      </div>
+    </div>
+
+    <!-- Kleinman's Questions -->
+    <p class="block-label">Culturally sensitive interviewing — Kleinman's questions</p>
+    <div class="framework-container" role="region" aria-label="Kleinman's questions">
+      <div class="framework-header">
+        <span class="framework-title">Understanding health through the client's narrative</span>
+        <span class="framework-tag">Kleinman &amp; Benson, PLoS Med, 2006</span>
+      </div>
+      <div style="padding:20px">
+        <p style="margin:0 0 18px;font-size:15px;color:var(--ink-mid);line-height:1.65">Rather than imposing a biomedical frame, Kleinman's questions invite the client to explain their own understanding of their health, food, and illness. Click each question to see how to use it in a dietetic consultation.</p>
+        <div id="kleinman-qs" style="display:flex;flex-direction:column;gap:10px">
+          <div class="kleinman-q" onclick="toggleKleinman(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleKleinman(this)" role="button" aria-expanded="false">
+            <div class="kleinman-q-header">
+              <span class="kleinman-num">1</span>
+              <span class="kleinman-text">"What do you think is going on with your health?"</span>
+              <span class="kleinman-arrow">▶</span>
+            </div>
+            <div class="kleinman-q-body" hidden>Opens space for the client's own explanatory model — their cultural, spiritual, or experiential understanding of their condition. You may learn things a medical history never would.</div>
+          </div>
+          <div class="kleinman-q" onclick="toggleKleinman(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleKleinman(this)" role="button" aria-expanded="false">
+            <div class="kleinman-q-header">
+              <span class="kleinman-num">2</span>
+              <span class="kleinman-text">"Why do you think this problem started?"</span>
+              <span class="kleinman-arrow">▶</span>
+            </div>
+            <div class="kleinman-q-body" hidden>Reveals causal beliefs — stress, spiritual imbalance, food "wrongness", ancestral factors. Knowing the client's causal model shapes how you frame advice so it can actually be heard.</div>
+          </div>
+          <div class="kleinman-q" onclick="toggleKleinman(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleKleinman(this)" role="button" aria-expanded="false">
+            <div class="kleinman-q-header">
+              <span class="kleinman-num">3</span>
+              <span class="kleinman-text">"How do you manage it?"</span>
+              <span class="kleinman-arrow">▶</span>
+            </div>
+            <div class="kleinman-q-body" hidden>Uncovers existing food, herbal, or traditional practices — which may be supportive, neutral, or occasionally in tension with clinical goals. Never dismiss without first understanding.</div>
+          </div>
+          <div class="kleinman-q" onclick="toggleKleinman(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleKleinman(this)" role="button" aria-expanded="false">
+            <div class="kleinman-q-header">
+              <span class="kleinman-num">4</span>
+              <span class="kleinman-text">"Who helps you with health or food decisions?"</span>
+              <span class="kleinman-arrow">▶</span>
+            </div>
+            <div class="kleinman-q-body" hidden>Identifies decision-making networks — often family, Elders, community figures, or religious leaders. In many cultures, individual "patient autonomy" is less relevant than collective family decision-making. Knowing this is essential for building a plan that will actually work.</div>
+          </div>
+          <div class="kleinman-q" onclick="toggleKleinman(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleKleinman(this)" role="button" aria-expanded="false">
+            <div class="kleinman-q-header">
+              <span class="kleinman-num">5</span>
+              <span class="kleinman-text">"What treatments or foods do you believe help?"</span>
+              <span class="kleinman-arrow">▶</span>
+            </div>
+            <div class="kleinman-q-body" hidden>Positions the client as the expert in their own health. Helps you identify protective foods and practices worth affirming — and opens a genuinely collaborative space for negotiation where worldviews differ.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication Skills -->
+    <p class="block-label">Cultural communication in practice</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot green" aria-hidden="true"></span>
+          <span class="acc-label">Using open-ended questions &amp; avoiding assumptions</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Ask "What does a typical day of eating look like for you?" rather than assuming based on background.</li>
+            <li>Avoid questions that presuppose Western food norms (e.g. "Do you eat three meals a day?").</li>
+            <li>Invite the patient to teach you about their food traditions — curiosity, not assessment, is the posture.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot ochre" aria-hidden="true"></span>
+          <span class="acc-label">Making information accessible</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Avoid jargon — "saturated fats" becomes "fats that are solid at room temperature", "glycaemic control" becomes "keeping blood sugar steady". Speak in language that doesn't require a health degree.</li>
+            <li>Avoid idioms — phrases like "cut back", "rule of thumb", or "watch what you eat" may not translate meaningfully, literally or culturally.</li>
+            <li>Supplement verbal information with <strong>culturally appropriate visuals</strong> — food models, pictures, gestures, and locally familiar foods rather than generic Western food guides.</li>
+            <li>Speak in short sentences and pause frequently; don't front-load a consultation with information.</li>
+            <li>Use the client's language where possible — even just greetings or basic food words signal respect and willingness.</li>
+            <li>Check health literacy without assuming deficit — ask <em>"Can you show me on this label what you would eat?"</em></li>
+            <li>Use <strong>teach-back</strong>: ask the client to repeat back key information in their own words — not to test them, but to check that your explanation landed as intended.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot terra" aria-hidden="true"></span>
+          <span class="acc-label">Food beliefs, rituals, &amp; cultural food practices</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Understand that food is deeply cultural — linked to identity, ceremony, and community belonging.</li>
+            <li>Never dismiss traditional foods; explore how they can be incorporated into nutritional plans.</li>
+            <li>Recognise food sharing as a cultural obligation — a "non-compliant diet" may reflect cultural values in action.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot green" aria-hidden="true"></span>
+          <span class="acc-label">Food, culture &amp; nutrition assessment</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin:0 0 10px;font-size:15px;color:var(--ink-mid)">Dietetic practice must recognise the cultural <em>significance</em> of foods — not just their nutrient profile. We are not only analysing intake; we're analysing meaning. <em>(Kittler, Sucher &amp; Nahikian-Nelms, 2017)</em></p>
+          <ul>
+            <li><strong>Foods used for healing</strong> — many cultures have specific foods believed to restore health, warmth, or balance. These are not superstitions; they are knowledge systems. Ask about them.</li>
+            <li><strong>Foods that are culturally avoided</strong> — avoidances may be religious, spiritual, seasonal, or related to life stage (e.g. post-partum, illness, mourning). Never assume a "restriction" is simply preference.</li>
+            <li><strong>Ethnic foods and frequency</strong> — staple foods, preparation methods, and eating patterns may differ substantially from population averages used in standard food frequency questionnaires.</li>
+            <li><strong>Household decision-making around food</strong> — who shops, who cooks, who decides what is eaten. Individual dietary advice may be ineffective if it ignores household dynamics.</li>
+            <li><strong>Ritual and festival foods</strong> — celebratory or ceremonial eating is often nutritionally dense or structurally different from everyday eating. Context matters before making judgements about "usual intake".</li>
+            <li><strong>Fasting seasons and practices</strong> — many religions and cultures involve fasting (Ramadan, Lent, Indigenous ceremonial fasting). Dietary plans must accommodate — not override — these practices.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this.parentElement)" aria-expanded="false">
+          <span class="acc-dot ochre" aria-hidden="true"></span>
+          <span class="acc-label">Values &amp; behaviours that shape nutrition practice</span>
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin:0 0 10px;font-size:15px;color:var(--ink-mid)">Cultural values are not background noise — they shape every food decision a client makes. Being aware of these domains helps you ask better questions and design more workable plans.</p>
+          <ul>
+            <li><strong>Family structure</strong> — nuclear, extended, multigenerational households each have different food procurement, preparation, and decision-making dynamics.</li>
+            <li><strong>Gender roles</strong> — who is responsible for cooking, shopping, and making health decisions may be culturally defined in ways that affect how you engage with the patient.</li>
+            <li><strong>Age and respect for Elders</strong> — in many cultures, Elders hold significant authority over health and food decisions. Engaging the family system, not just the individual, may be essential.</li>
+            <li><strong>Religious beliefs and food rules</strong> — halal, kosher, vegetarianism, fasting observances, and food blessings all shape intake. Know what to ask and how to ask it with respect.</li>
+            <li><strong>Cultural beliefs about wellness and illness</strong> — illness may be understood as spiritual, relational, or energetic (e.g. "hot/cold" food theories in many Asian and Latin American traditions). These explanatory models are meaningful and clinically relevant.</li>
+            <li><strong>Food preparation customs</strong> — cooking methods, timing, spices, and communal eating styles affect nutrient retention, portion sizes, and the social meaning of food.</li>
+            <li><strong>Acculturation level</strong> — clients who have recently migrated may eat very differently from long-settled community members. Acculturation affects food access, food identity, and comfort with biomedical encounters.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Further tips for clinicians -->
+    <p class="block-label">Further tips — assessing culturally diverse patients</p>
+    <div class="framework-container" role="region" aria-label="Further assessment questions for culturally diverse patients">
+      <div class="framework-header">
+        <span class="framework-title">Useful questions for cultural assessment</span>
+        <span class="framework-tag">Kittler et al.</span>
+      </div>
+      <div style="padding:20px">
+        <p style="margin:0 0 14px;font-size:14px;color:var(--ink-mid);line-height:1.65">The following questions help open respectful conversations about cultural beliefs, practices, and health experiences. Use them to supplement your assessment — not as a checklist to rush through.</p>
+        <ul style="margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:10px">
+          <li style="font-size:14px;color:var(--ink-mid);line-height:1.6"><em>"So that I might be aware of and respect your cultural beliefs…"</em> — use this as an opening framing phrase before asking any sensitive cultural questions.</li>
+          <li style="font-size:14px;color:var(--ink-mid);line-height:1.6">"Can you tell me what languages are spoken in your home and the languages that you understand and speak?"</li>
+          <li style="font-size:14px;color:var(--ink-mid);line-height:1.6">"Please describe your usual diet. Also, are there times during the year when you change your diet in celebration of religious and other ethnic holidays?"</li>
+          <li style="font-size:14px;color:var(--ink-mid);line-height:1.6">"Can you tell me about beliefs and practices including special events such as birth, marriage and death that you feel I should know?"</li>
+          <li style="font-size:14px;color:var(--ink-mid);line-height:1.6">"Can you tell me about your experiences with health care providers in your native country? How often each year did you see a health care provider before you arrived in ______? Have you noticed any differences between the type of care you received in your native country and the type you receive here? If yes, could you tell me about those differences?"</li>
+        </ul>
+        <div style="margin-top:14px;padding:12px 14px;background:var(--ochre-pale);border-radius:8px;border-left:3px solid var(--ochre);font-size:13px;color:var(--ink-mid);line-height:1.6">
+          <strong>Remember:</strong> Always introduce these questions with a phrase like the first one above — signalling your intent to learn and respect, not to judge or categorise, sets the tone for the whole consultation.
+        </div>
+      </div>
+    </div>
+
+    <!-- Working with Interpreters -->
+    <p class="block-label">Working with interpreters</p>
+    <div class="framework-container">
+      <div class="framework-header">
+        <span class="framework-title">Key principles for interpreter-assisted consultations</span>
+        <span class="framework-tag">Practice skills</span>
+      </div>
+      <div style="padding:20px">
+        <ul class="checklist" id="interp-checklist" role="list">
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Speak directly <em>to the client</em>, not to the interpreter — maintain eye contact with the patient.</span></li>
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Avoid idioms, metaphors, and culturally dependent phrases (e.g. "eat like a horse").</span></li>
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Plan sessions carefully — allow significantly more time than usual.</span></li>
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Check comprehension using back-translation ("Could you tell me in your own words what I've just explained?").</span></li>
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Brief the interpreter beforehand — share the purpose of the session and key terminology.</span></li>
+          <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Use professional interpreters, not family members, for clinical consultations where possible.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Knowledge check W2 -->
+    <p class="block-label" style="margin-top:32px">Knowledge check</p>
+    <ul class="checklist" role="list" id="w2-checklist">
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can explain the difference between cultural humility and cultural competence.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can describe each element of the ASKED model and give a dietetics-specific example.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I can apply the 4 Cs framework to a clinical assessment scenario.</span></li>
+      <li><div class="check-marker" role="checkbox" tabindex="0" aria-checked="false" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>I understand the key principles for working effectively with interpreters.</span></li>
+    </ul>
+
+  </div><!-- end w2 -->
+
+  <!-- ═══════════════════════════ RESOURCES ═══════════════════════════ -->
+  <div id="res" class="workshop-panel" role="tabpanel">
+
+    <h1 class="section-heading">Further Resources</h1>
+    <p class="section-subtitle">Curated videos, readings, organisations &amp; podcasts to deepen your learning</p>
+
+    <!-- Filter buttons -->
+    <div class="res-filter" role="group" aria-label="Filter resources by type">
+      <button class="filter-btn active" onclick="filterRes('all', this)">All</button>
+      <button class="filter-btn" onclick="filterRes('video', this)">Videos &amp; Documentaries</button>
+      <button class="filter-btn" onclick="filterRes('reading', this)">Readings &amp; Articles</button>
+      <button class="filter-btn" onclick="filterRes('org', this)">Organisations</button>
+      <button class="filter-btn" onclick="filterRes('podcast', this)">Podcasts</button>
+    </div>
+
+    <div class="res-grid" id="res-grid">
+
+      <!-- VIDEOS -->
+      <a href="https://www.sbs.com.au/ondemand/tv-series/our-medicine" target="_blank" rel="noopener" class="res-card res-card-new" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic fn">First Nations</span>
+          <span class="res-new-pill">New 2025</span>
+        </div>
+        <div class="res-title">Our Medicine — NITV/SBS On Demand (Series 1 &amp; 2)</div>
+        <div class="res-desc">A six-part observational documentary series following First Nations doctors, nurses, paramedics, traditional healers, and Aboriginal Health Liaison Officers as they support patients through the healthcare system. Series 2 is currently airing (March 2026). Patient journeys are central — including an AHLO supporting a patient through surgery, patients navigating dialysis and cataract care, and traditional healing practices on Country. Narrated by Leah Purcell AM. Free to stream on SBS On Demand in Australia.</div>
+        <div class="res-meta">SBS On Demand &nbsp;·&nbsp; Free &nbsp;·&nbsp; 6 episodes per series &nbsp;·&nbsp; Currently airing</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://vics.org.au/wcmics" target="_blank" rel="noopener" class="res-card res-card-new" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic cald">CALD</span>
+          <span class="res-new-pill">New 2024</span>
+        </div>
+        <div class="res-title">Beyond the Barriers: Cancer Care across WCMICS (2024)</div>
+        <div class="res-desc">A documentary from the Western &amp; Central Melbourne Integrated Cancer Service featuring real patient and carer stories from CALD backgrounds — including people from Asian, Mediterranean, Arabic, and Indian Subcontinent communities — navigating cancer care in an Australian health system that wasn't designed for them. Clinicians and health professionals also speak candidly about the gaps. Directly relevant to understanding the CALD patient experience, language barriers, and the emotional weight of receiving care in an unfamiliar system. Watch free on the WCMICS website.</div>
+        <div class="res-meta">vics.org.au/wcmics &nbsp;·&nbsp; Free &nbsp;·&nbsp; ~30 min &nbsp;·&nbsp; Patient voices</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.abc.net.au/tv/programs/you-cant-ask-that/" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">"You Can't Ask That" — First Nations Episodes</div>
+        <div class="res-desc">ABC series where people ask First Nations Australians the questions others are too afraid to ask. Deeply humanising, eye-opening, and essential viewing for healthcare students.</div>
+        <div class="res-meta">ABC iview &nbsp;·&nbsp; Free &nbsp;·&nbsp; Multiple episodes</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.youtube.com/@AIATSIS" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">AIATSIS YouTube Channel</div>
+        <div class="res-desc">The Australian Institute of Aboriginal and Torres Strait Islander Studies publishes documentaries, lectures, and cultural content. Excellent for understanding Country, language, and identity.</div>
+        <div class="res-meta">YouTube &nbsp;·&nbsp; Free</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+
+      <a href="https://www.youtube.com/watch?v=SaSHLbS1V4w" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic hum">Cultural Humility</span>
+        </div>
+        <div class="res-title">Cultural Humility: People, Principles and Practices</div>
+        <div class="res-desc">A widely used documentary featuring Melanie Tervalon and Jann Murray-García, who coined the term "cultural humility." Foundational viewing for understanding the shift from competence to humility.</div>
+        <div class="res-meta">YouTube &nbsp;·&nbsp; Free &nbsp;·&nbsp; ~30 min</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=L6wiBKClHqY" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic both">Both Topics</span>
+        </div>
+        <div class="res-title">TEDxSydney: "The Value of Deep Listening — The Aboriginal Gift to the Nation" | Judy Atkinson</div>
+        <div class="res-desc">A powerful 16-minute talk by Jiman and Bundjalung woman and trauma healing expert Emeritus Professor Judy Atkinson. She draws on her decades of work with Aboriginal communities to describe deep listening — <em>dadirri</em> — as a practice of healing, relationship, and witnessing. Directly relevant to therapeutic relationships in dietetics and all clinical practice.</div>
+        <div class="res-meta">TEDxSydney &nbsp;·&nbsp; YouTube &nbsp;·&nbsp; Free &nbsp;·&nbsp; 16 min</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.facebook.com/SBSAustralia/videos/boundary-street-explainer/499138105157965/" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">SBS Australia — Boundary Street Explainer</div>
+        <div class="res-desc">A short SBS explainer on the dark colonial history of Brisbane's Boundary Streets — one of four streets that formed the town boundary of early Meanjin. Aboriginal and Torres Strait Islander people were subject to a 4pm curfew and barred from the city entirely on Sundays, enforced by mounted police with stockwhips. Directly relevant to understanding historical trauma and the colonial legacy your patients may carry.</div>
+        <div class="res-meta">SBS Australia &nbsp;·&nbsp; Facebook &nbsp;·&nbsp; Free &nbsp;·&nbsp; Short</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://youtu.be/3D88YuxbYaw" target="_blank" rel="noopener" class="res-card" data-type="video" data-tag="video">
+        <div class="res-card-top">
+          <span class="res-badge video">Video</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">UQ Has a Blak History — Acknowledgement &amp; Introduction</div>
+        <div class="res-desc">The official introduction to the UQ Library's open textbook on the Blak history of The University of Queensland. Sets the context of truth-telling, colonial history, and the ongoing contributions of Aboriginal and Torres Strait Islander peoples and communities to UQ.</div>
+        <div class="res-meta">UQ Library &nbsp;·&nbsp; YouTube &nbsp;·&nbsp; Free &nbsp;·&nbsp; 2m 25s</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <!-- READINGS -->
+
+      <a href="https://uq.pressbooks.pub/uq-blak-history/" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">UQ Has a Blak History</div>
+        <div class="res-desc">A free open textbook by UQ Library's Aboriginal and Torres Strait Islander Collections and Services team. Covers Country and place across UQ campuses, the history of First Nations students and staff, political activism, and significant collections. Created in the spirit of truth-telling and healing.</div>
+        <div class="res-meta">University of Queensland &nbsp;·&nbsp; Free &nbsp;·&nbsp; 2024</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.lowitja.org.au/resource/cultural-safety-in-australia/" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Lowitja Institute — Cultural Safety Position Statement</div>
+        <div class="res-desc">Australia's peak Indigenous health research organisation outlines what cultural safety means for First Nations health and why it must be embedded in every health system and clinical interaction.</div>
+        <div class="res-meta">Lowitja Institute &nbsp;·&nbsp; Free PDF</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+      <a href="https://healthinfonet.ecu.edu.au" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Australian Indigenous HealthInfoNet — Evidence Portal</div>
+        <div class="res-desc">Comprehensive evidence summaries on Aboriginal and Torres Strait Islander health across every condition area, including nutrition, chronic disease, and social determinants. Invaluable for evidence-based practice.</div>
+        <div class="res-meta">ECU &nbsp;·&nbsp; Free &nbsp;·&nbsp; Continuously updated</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://dietitiansaustralia.org.au/working-dietetics/skills-recognition-australia/process-overseas-educated-dietitians/aboriginal-and-torres-strait-islander-cultural-awareness" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic both">Both Topics</span>
+        </div>
+        <div class="res-title">Dietitians Australia — Cultural Competence Resources</div>
+        <div class="res-desc">Professional body resources specifically for dietitians on providing culturally responsive nutritional care across diverse communities, including First Nations and culturally and linguistically diverse populations.</div>
+        <div class="res-meta">Dietitians Australia &nbsp;·&nbsp; Member access</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.researchsquare.com/article/rs-8032650/v1" target="_blank" rel="noopener" class="res-card res-card-new" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic cald">CALD</span>
+          <span class="res-new-pill">New 2025</span>
+        </div>
+        <div class="res-title">The Role and Meaning of Hospital Food for CALD Patients (2025)</div>
+        <div class="res-desc">An Australian qualitative study using focus groups with CALD inpatients from Asian, Mediterranean, Arabic, and Indian Subcontinent communities. Three major themes emerged: familiar food as a source of comfort in an unfamiliar environment; cultural food traditions as wisdom about health and healing; and culturally appropriate food as physical support for recovery. The hospital menu studied was largely Anglo-European and not available in languages other than English. Directly relevant to dietetic practice with CALD patients.</div>
+        <div class="res-meta">Research Square (preprint) &nbsp;·&nbsp; Free &nbsp;·&nbsp; Western Health, Victoria</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://meanjin.com.au/essays/makunschan-meeanjan-miganchan-meanjan-magandjin/" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Makunschan, Meeanjan, Miganchan, Meanjan, Magandjin — Gaja Kerry Charlton (Meanjin, 2023)</div>
+        <div class="res-desc">Written by Yagarabul and Gabi Gabi Elder Gaja Kerry Charlton, this lead essay in <em>Meanjin</em> magazine explores the cultural, linguistic, and family history behind the word "Meanjin" — the Yagara name for Brisbane. It situates language as inseparable from Country, sovereignty, and identity. Grounding reading for QLD students working on Turrbal and Yuggera Country.</div>
+        <div class="res-meta">Meanjin &nbsp;·&nbsp; Vol. 82, No. 2, Winter 2023 &nbsp;·&nbsp; Free online</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+      <a href="https://www.fao.org/nutrition/education/food-dietary-guidelines/regions/en/" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic">Food &amp; Culture</span>
+        </div>
+        <div class="res-title">FAO Food-Based Dietary Guidelines by Region</div>
+        <div class="res-desc">The Food and Agriculture Organization's directory of national and regional food-based dietary guidelines from around the world. An essential reference for understanding what "healthy eating" looks like in different cultural contexts — and why Australian dietary guidance may feel unfamiliar or irrelevant to patients from other countries. Directly relevant to working with CALD clients.</div>
+        <div class="res-meta">fao.org &nbsp;·&nbsp; Free &nbsp;·&nbsp; Multiple languages</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="http://www.foodbycountry.com" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Reading</span>
+          <span class="res-topic">Food &amp; Culture</span>
+        </div>
+        <div class="res-title">Food by Country — Cultural Food Reference</div>
+        <div class="res-desc">A basic but accessible country-by-country guide to food cultures, traditional dishes, meal patterns, and culinary customs from around the world. Useful for building initial familiarity with foods and eating practices before seeing clients from unfamiliar cultural backgrounds — a starting point for curiosity, not a substitute for asking the client directly.</div>
+        <div class="res-meta">foodbycountry.com &nbsp;·&nbsp; Free &nbsp;·&nbsp; Introductory level</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <!-- FIRST NATIONS FOOD -->
+      <a href="https://mydillybag.com.au" target="_blank" rel="noopener" class="res-card res-card-new" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Website</span>
+          <span class="res-topic fn">First Nations Food</span>
+        </div>
+        <div class="res-title">My Dilly Bag — Aunty Dale Chapman</div>
+        <div class="res-desc">Aunty Dale Chapman is a proud Yuwaalaraay Kooma woman, award-winning chef, bush food educator, cookbook author, and Adjunct Senior Fellow at UQ — based right here on Gubbi Gubbi Country on the Sunshine Coast. My Dilly Bag partners with Aboriginal communities to grow and share Australian sovereign foods and botanicals. A powerful local example of First Nations food knowledge as living expertise, cultural pride, and community empowerment.</div>
+        <div class="res-meta">mydillybag.com.au &nbsp;·&nbsp; First Nations owned &nbsp;·&nbsp; Sunshine Coast</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://warndu.com" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Website</span>
+          <span class="res-topic fn">First Nations Food</span>
+        </div>
+        <div class="res-title">Warndu — First Nations Food & Culture</div>
+        <div class="res-desc">Founded by Damien Coulthard, an Adnyamathanha and Dieri man of the Flinders Ranges, and Rebecca Sullivan. Warndu — meaning "good" in Adnyamathanha language — champions Australian native food through a cultural and ecological lens. Their ingredient guide, cookbooks (<em>Warndu Mai</em> and <em>First Nations Food Companion</em>), and education resources show students how food connects to Country, story, and identity.</div>
+        <div class="res-meta">warndu.com &nbsp;·&nbsp; Indigenous-owned &nbsp;·&nbsp; South Australia</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.dreamtimetuka.com.au" target="_blank" rel="noopener" class="res-card" data-type="reading" data-tag="reading">
+        <div class="res-card-top">
+          <span class="res-badge reading">Website</span>
+          <span class="res-topic fn">First Nations Food</span>
+        </div>
+        <div class="res-title">Dreamtime Tuka — Aboriginal Bush Tucker Business</div>
+        <div class="res-desc">A proud Aboriginal Queensland business making snacks and products from native bush tucker ingredients — from lemon myrtle to bush plum. Commissioned a custom artwork by Wakka Wakka artist David Williams of Gilimbaa to represent their connection to culture, food, and community. A contemporary example of how First Nations food businesses weave cultural identity, art, and nutrition into everyday life.</div>
+        <div class="res-meta">dreamtimetuka.com.au &nbsp;·&nbsp; Aboriginal owned &nbsp;·&nbsp; Queensland</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <!-- ORGANISATIONS -->
+      <a href="https://www.13yarn.org.au" target="_blank" rel="noopener" class="res-card res-card-yarn" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+          <span class="yarn-pill">Crisis Support</span>
+        </div>
+        <div class="res-title">13YARN — First Nations Crisis Support Line</div>
+        <div class="res-desc">Australia's only national crisis support line staffed entirely by First Nations workers. Available 24/7 for Aboriginal and Torres Strait Islander peoples experiencing distress, grief, or suicidal thoughts. As a clinician, knowing this line exists — and sharing it with patients and families — is part of culturally safe practice.</div>
+        <div class="res-meta">Call or text <strong>13 92 76</strong> &nbsp;·&nbsp; 24/7 &nbsp;·&nbsp; Free &nbsp;·&nbsp; 13yarn.org.au</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://aiatsis.gov.au" target="_blank" rel="noopener" class="res-card" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">AIATSIS — Australian Institute of Aboriginal &amp; Torres Strait Islander Studies</div>
+        <div class="res-desc">Australia's national institution for First Nations research, collections, and publishing. The hub for culturally grounded resources, research guides, and the AIATSIS Code of Ethics for research with Aboriginal peoples.</div>
+        <div class="res-meta">aiatsis.gov.au &nbsp;·&nbsp; Free resources</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.naccho.org.au" target="_blank" rel="noopener" class="res-card" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">NACCHO — National Aboriginal Community Controlled Health Organisation</div>
+        <div class="res-desc">The national peak body for Aboriginal Community Controlled Health Organisations. Provides policy statements, research, and context on community-controlled healthcare — the gold standard for First Nations health delivery.</div>
+        <div class="res-meta">naccho.org.au &nbsp;·&nbsp; Free</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.lowitja.org.au" target="_blank" rel="noopener" class="res-card" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Lowitja Institute</div>
+        <div class="res-desc">Australia's only national Aboriginal and Torres Strait Islander health research institute. Produces world-class research on health equity, cultural safety, and community-led approaches to health.</div>
+        <div class="res-meta">lowitja.org.au &nbsp;·&nbsp; Free reports &amp; publications</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.closethegap.org.au" target="_blank" rel="noopener" class="res-card" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Close the Gap Campaign</div>
+        <div class="res-desc">The national campaign for Indigenous health equity. Annual Close the Gap progress reports provide up-to-date data on health disparities and policy progress — essential for understanding the current landscape.</div>
+        <div class="res-meta">closethegap.org.au &nbsp;·&nbsp; Free</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.turrbal.com.au/our-story" target="_blank" rel="noopener" class="res-card" data-type="org" data-tag="org">
+        <div class="res-card-top">
+          <span class="res-badge org">Organisation</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Turrbal Aboriginal Tribe — Our Story</div>
+        <div class="res-desc">The official website of the Turrbal Tribe — Traditional Owners of Meanjin (Brisbane). Their history page tells the story of the Turrbal people in their own voice: their pre-colonial society, the massacres of the colonial era, survival, and ongoing presence today. Fewer than 50 Turrbal descendants remain. Essential reading for students on placement in Brisbane hospitals.</div>
+        <div class="res-meta">turrbal.com.au &nbsp;·&nbsp; Free</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+
+      <!-- PODCASTS -->
+      <a href="https://www.lowitja.org.au/lowitja-learning/" target="_blank" rel="noopener" class="res-card" data-type="podcast" data-tag="podcast">
+        <div class="res-card-top">
+          <span class="res-badge podcast">Podcast</span>
+          <span class="res-topic fn">First Nations</span>
+        </div>
+        <div class="res-title">Lowitja Institute Podcast</div>
+        <div class="res-desc">Conversations with Aboriginal and Torres Strait Islander health researchers and leaders on equity, self-determination, cultural safety, and community-led health. Research meets lived experience.</div>
+        <div class="res-meta">Lowitja Institute &nbsp;·&nbsp; Free &nbsp;·&nbsp; Spotify, Apple Podcasts</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.abc.net.au/radionational/programs/healthreport/" target="_blank" rel="noopener" class="res-card" data-type="podcast" data-tag="podcast">
+        <div class="res-card-top">
+          <span class="res-badge podcast">Podcast</span>
+          <span class="res-topic both">Both Topics</span>
+        </div>
+        <div class="res-title">ABC RN Health Report</div>
+        <div class="res-desc">Australia's longest-running health radio program regularly covers Indigenous health, cultural determinants, and health inequity. Episodes are short, evidence-based, and easy to fit into a study routine.</div>
+        <div class="res-meta">ABC Radio National &nbsp;·&nbsp; Free &nbsp;·&nbsp; Weekly</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+      <a href="https://www.aihw.gov.au/reports-data/population-groups/indigenous-australians/overview" target="_blank" rel="noopener" class="res-card" data-type="podcast" data-tag="podcast">
+        <div class="res-card-top">
+          <span class="res-badge podcast">Podcast</span>
+          <span class="res-topic hum">Cultural Humility</span>
+        </div>
+        <div class="res-title">Kultured Wellness Podcast</div>
+        <div class="res-desc">Explores cultural humility, anti-racism, and decolonising practice for health and allied health professionals. Highly relevant to dietetics students navigating diverse clinical environments.</div>
+        <div class="res-meta">Spotify, Apple Podcasts &nbsp;·&nbsp; Free</div>
+        <div class="res-arrow" aria-hidden="true">→</div>
+      </a>
+
+    </div><!-- end res-grid -->
+
+  </div><!-- end res -->
+
+  <div id="refs" class="workshop-panel" role="tabpanel" hidden>
+    <h1 class="section-heading">References</h1>
+    <p class="section-subtitle">All frameworks, articles, and resources cited or used in this workshop — APA 7th edition</p>
+
+    <style>
+      .refs-section { margin-bottom: 32px; }
+      .refs-section-title {
+        font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+        color: var(--ink-light); border-bottom: 2px solid var(--border);
+        padding-bottom: 6px; margin-bottom: 16px;
+      }
+      .ref-item {
+        font-size: 14.5px; color: var(--ink-mid); line-height: 1.75;
+        padding: 10px 14px 10px 28px; text-indent: -14px;
+        border-left: 3px solid transparent;
+        border-radius: 0 6px 6px 0; margin-bottom: 8px;
+        transition: border-color .2s, background .2s;
+      }
+      .ref-item:hover { border-left-color: var(--ochre); background: var(--ochre-pale); }
+      .ref-item a { color: var(--green); word-break: break-all; }
+      .ref-item a:hover { color: var(--ochre); }
+      .ref-note {
+        font-size: 13px; color: var(--ink-light); font-style: italic;
+        background: var(--sand); border-radius: 8px; padding: 12px 16px;
+        margin-bottom: 24px; line-height: 1.6;
+      }
+    </style>
+
+    <p class="ref-note">This reference list covers frameworks, models, and scholarly works discussed in Workshop 4, as well as the curated resources in the Resources tab. Use these references in your own academic writing and to guide further independent reading.</p>
+
+    <!-- FOUNDATIONAL FRAMEWORKS -->
+    <div class="refs-section">
+      <div class="refs-section-title">Foundational frameworks &amp; models</div>
+
+      <p class="ref-item">Campinha-Bacote, J. (2002). The process of cultural competence in the delivery of healthcare services: A model of care. <em>Journal of Transcultural Nursing, 13</em>(3), 181–184. <a href="https://doi.org/10.1177/10459602013003003" target="_blank" rel="noopener">https://doi.org/10.1177/10459602013003003</a></p>
+
+      <p class="ref-item">Berlin, E. A., &amp; Fowkes, W. C. (1983). A teaching framework for cross-cultural health care: Application in family practice. <em>Western Journal of Medicine, 139</em>(6), 934–938.</p>
+
+      <p class="ref-item">Kleinman, A., &amp; Benson, P. (2006). Anthropology in the clinic: The problem of cultural competency and how to fix it. <em>PLoS Medicine, 3</em>(10), e294. <a href="https://doi.org/10.1371/journal.pmed.0030294" target="_blank" rel="noopener">https://doi.org/10.1371/journal.pmed.0030294</a></p>
+
+      <p class="ref-item">Kittler, P. G., Sucher, K. P., &amp; Nahikian-Nelms, M. (2017). <em>Food and culture</em> (7th ed.). Cengage Learning.</p>
+
+      <p class="ref-item">Tervalon, M., &amp; Murray-García, J. (1998). Cultural humility versus cultural competence: A critical distinction in defining physician training outcomes in multicultural education. <em>Journal of Health Care for the Poor and Underserved, 9</em>(2), 117–125. <a href="https://doi.org/10.1353/hpu.2010.0233" target="_blank" rel="noopener">https://doi.org/10.1353/hpu.2010.0233</a></p>
+    </div>
+
+    <!-- CULTURAL SAFETY — AUSTRALIAN CONTEXT -->
+    <div class="refs-section">
+      <div class="refs-section-title">Cultural safety — Australian context</div>
+
+      <p class="ref-item">Australian Health Practitioner Regulation Agency (AHPRA) &amp; National Boards. (2020). <em>Racism unmasked: Eliminating racism in health systems</em>. AHPRA. <a href="https://www.ahpra.gov.au/About-Ahpra/What-We-Do/Cultural-safety.aspx" target="_blank" rel="noopener">https://www.ahpra.gov.au</a></p>
+
+      <p class="ref-item">Indigenous Allied Health Australia (IAHA). (2019). <em>Cultural responsiveness in action: An IAHA framework</em> (Rev. ed.). IAHA. <a href="https://iaha.com.au/workforce-support/training-and-development/cultural-responsiveness-in-action-training/" target="_blank" rel="noopener">https://iaha.com.au</a></p>
+
+      <p class="ref-item">Lowitja Institute. (2021). <em>Cultural safety in Australia: Position statement</em>. Lowitja Institute. <a href="https://www.lowitja.org.au/resource/cultural-safety-in-australia/" target="_blank" rel="noopener">https://www.lowitja.org.au/resource/cultural-safety-in-australia/</a></p>
+
+      <p class="ref-item">National Aboriginal Community Controlled Health Organisation (NACCHO). (n.d.). <em>NACCHO: National Aboriginal Community Controlled Health Organisation</em>. <a href="https://www.naccho.org.au" target="_blank" rel="noopener">https://www.naccho.org.au</a></p>
+
+      <p class="ref-item">Queensland Health. (n.d.). <em>Aboriginal and Torres Strait Islander cultural capability</em>. Queensland Government. <a href="https://www.health.qld.gov.au/public-health/groups/atsihealth/cultural-capability" target="_blank" rel="noopener">https://www.health.qld.gov.au/public-health/groups/atsihealth/cultural-capability</a></p>
+
+      <p class="ref-item">Royal Australasian College of Physicians (RACP). (n.d.). <em>Culturally safe supervision hub</em>. RACP. <a href="https://www.racp.edu.au/about/indigenous-equity-and-cultural-safety/cultural-safety" target="_blank" rel="noopener">https://www.racp.edu.au</a></p>
+    </div>
+
+    <!-- FIRST NATIONS PEOPLES, HISTORY & HEALTH -->
+    <div class="refs-section">
+      <div class="refs-section-title">First Nations peoples, history &amp; health in Australia</div>
+
+      <p class="ref-item">Acres, L., Baumann, G., Lancaster, R., Murphy, C., &amp; Strasek-Barker, M. (2024). <em>UQ has a Blak History</em>. University of Queensland Library. <a href="https://uq.pressbooks.pub/uq-blak-history/" target="_blank" rel="noopener">https://uq.pressbooks.pub/uq-blak-history/</a></p>
+
+      <p class="ref-item">Australian Institute of Aboriginal and Torres Strait Islander Studies (AIATSIS). (2020). <em>AIATSIS Code of Ethics for Aboriginal and Torres Strait Islander Research</em>. AIATSIS. <a href="https://aiatsis.gov.au" target="_blank" rel="noopener">https://aiatsis.gov.au</a></p>
+
+      <p class="ref-item">Charlton, K. (2023). Makunschan, Meeanjan, Miganchan, Meanjan, Magandjin. <em>Meanjin, 82</em>(2). <a href="https://meanjin.com.au/essays/makunschan-meeanjan-miganchan-meanjan-magandjin/" target="_blank" rel="noopener">https://meanjin.com.au</a></p>
+
+      <p class="ref-item">Close the Gap Campaign Steering Committee. (2024). <em>Close the Gap: 2024 report</em>. NACCHO. <a href="https://www.closethegap.org.au" target="_blank" rel="noopener">https://www.closethegap.org.au</a></p>
+
+      <p class="ref-item">HealthInfoNet, Australian Indigenous. (n.d.). <em>Cultural safety for health professionals</em>. Edith Cowan University. <a href="https://healthinfonet.ecu.edu.au/key-resources/health-professionals/cultural-safety-for-health-professionals/" target="_blank" rel="noopener">https://healthinfonet.ecu.edu.au</a></p>
+
+      <p class="ref-item">Lowitja Institute. (n.d.). <em>Lowitja Institute: Australia's national Aboriginal and Torres Strait Islander health research institute</em>. <a href="https://www.lowitja.org.au" target="_blank" rel="noopener">https://www.lowitja.org.au</a></p>
+
+      <p class="ref-item">Turrbal Aboriginal Tribe. (n.d.). <em>Our story</em>. <a href="https://www.turrbal.com.au/our-story" target="_blank" rel="noopener">https://www.turrbal.com.au/our-story</a></p>
+    </div>
+
+    <!-- FOOD, CULTURE & DIETETIC PRACTICE -->
+    <div class="refs-section">
+      <div class="refs-section-title">Food, culture &amp; dietetic practice</div>
+
+      <p class="ref-item">Dietitians Australia. (n.d.). <em>Aboriginal and Torres Strait Islander cultural awareness resources</em>. <a href="https://dietitiansaustralia.org.au/working-dietetics/skills-recognition-australia/process-overseas-educated-dietitians/aboriginal-and-torres-strait-islander-cultural-awareness" target="_blank" rel="noopener">https://dietitiansaustralia.org.au</a></p>
+
+      <p class="ref-item">Food and Agriculture Organization of the United Nations (FAO). (n.d.). <em>Food-based dietary guidelines by region</em>. <a href="https://www.fao.org/nutrition/education/food-dietary-guidelines/regions/en/" target="_blank" rel="noopener">https://www.fao.org/nutrition/education/food-dietary-guidelines/regions/en/</a></p>
+
+      <p class="ref-item">Western Health. (2025). <em>The role and meaning of hospital food for culturally and linguistically diverse (CALD) patients</em> [Preprint]. Research Square. <a href="https://www.researchsquare.com/article/rs-8032650/v1" target="_blank" rel="noopener">https://www.researchsquare.com/article/rs-8032650/v1</a></p>
+    </div>
+
+    <!-- MULTIMEDIA & ONLINE RESOURCES -->
+    <div class="refs-section">
+      <div class="refs-section-title">Multimedia &amp; online resources cited</div>
+
+      <p class="ref-item">Atkinson, J. (2012, November). <em>The value of deep listening: The Aboriginal gift to the nation</em> [TEDx talk]. TEDxSydney. <a href="https://www.youtube.com/watch?v=L6wiBKClHqY" target="_blank" rel="noopener">https://www.youtube.com/watch?v=L6wiBKClHqY</a></p>
+
+      <p class="ref-item">Hook, J. N., Davis, D. E., Owen, J., Worthington, E. L., Jr., &amp; Utsey, S. O. (2013). Cultural humility: Measuring openness to culturally diverse clients. <em>Journal of Counseling Psychology, 60</em>(3), 353–366. [Referenced in <em>Cultural Humility: People, Principles and Practices</em> documentary, available at <a href="https://www.youtube.com/watch?v=SaSHLbS1V4w" target="_blank" rel="noopener">https://www.youtube.com/watch?v=SaSHLbS1V4w</a>]</p>
+
+      <p class="ref-item">NITV/SBS. (2023). <em>Our Medicine</em> [Television series]. SBS On Demand. <a href="https://www.sbs.com.au/ondemand/tv-series/our-medicine" target="_blank" rel="noopener">https://www.sbs.com.au/ondemand/tv-series/our-medicine</a></p>
+
+      <p class="ref-item">University of Queensland Library. (2024). <em>UQ has a Blak History: Acknowledgement and introduction</em> [Video]. YouTube. <a href="https://youtu.be/3D88YuxbYaw" target="_blank" rel="noopener">https://youtu.be/3D88YuxbYaw</a></p>
+
+      <p class="ref-item">Western and Central Melbourne Integrated Cancer Service (WCMICS). (2024). <em>Beyond the barriers: Cancer care across WCMICS</em> [Video]. <a href="https://vics.org.au/wcmics" target="_blank" rel="noopener">https://vics.org.au/wcmics</a></p>
+    </div>
+
+    <!-- PHILOSOPHY & EPISTEMOLOGY -->
+    <div class="refs-section">
+      <div class="refs-section-title">Philosophy of knowledge &amp; ontology/epistemology</div>
+
+      <p class="ref-item">Crotty, M. (1998). <em>The foundations of social research: Meaning and perspective in the research process</em>. Sage.</p>
+
+      <p class="ref-item">Smith, L. T. (2012). <em>Decolonizing methodologies: Research and Indigenous peoples</em> (2nd ed.). Zed Books.</p>
+
+      <p class="ref-item">Kovach, M. (2009). <em>Indigenous methodologies: Characteristics, conversations, and contexts</em>. University of Toronto Press.</p>
+    </div>
+
+    <p class="ref-note" style="margin-top:24px">For questions about referencing or to report a broken link, contact your unit coordinator. All URLs were verified at time of publication. Web resources should be accessed directly for the most current version.</p>
+
+  </div><!-- end refs -->
+
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── ASKED Data ──
+  const askedData = {
+    A: {
+      word: 'Awareness',
+      desc: 'Awareness involves recognising your own cultural background, biases, and the privilege or power you may hold as a healthcare practitioner. Without self-awareness, even well-intentioned care can cause harm.',
+      example: 'Ask yourself: What assumptions am I making about this patient before they have even spoken?'
+    },
+    S: {
+      word: 'Skill',
+      desc: 'The ability to conduct culturally sensitive assessments — including dietary histories, communication, and physical assessment — in a way that adapts to the patient\'s cultural context.',
+      example: 'Practice conducting food frequency interviews using open-ended, non-assumptive questions across different cultural contexts.'
+    },
+    K: {
+      word: 'Knowledge',
+      desc: 'Understanding the health beliefs, practices, and worldviews of diverse cultural groups — including the historical and social determinants of health for those groups. Knowledge is ongoing, not a static checklist.',
+      example: 'Learn about traditional food practices, the significance of food sharing in community cultures, and how health conditions are culturally framed.'
+    },
+    E: {
+      word: 'Encounters',
+      desc: 'Actively seeking cross-cultural encounters to build your practical experience and challenge your assumptions. Genuine exposure, approached humbly, is irreplaceable.',
+      example: 'Seek clinical placements and community work in diverse settings. Engage with community members, not just patients in clinical settings.'
+    },
+    D: {
+      word: 'Desire',
+      desc: 'The motivation and genuine desire to become culturally competent. Without desire, the other four elements remain theoretical. This is the engine that drives the continuum forward.',
+      example: 'Honestly ask: Do I genuinely want to understand this patient\'s experience, or am I just going through a checklist?'
+    }
+  };
+
+  // ── LEARN Data ──
+  const learnData = {
+    L: {
+      title: 'Listen — with genuine curiosity',
+      desc: 'Before offering advice, listen deeply to the patient\'s story — their understanding of their health, their cultural context, their concerns, and what matters most to them. Active listening means withholding judgement and genuinely seeking to understand.',
+      tip: 'Tip: Ask "Can you tell me more about what this means for you?" and sit with silence comfortably.'
+    },
+    E: {
+      title: 'Explain — your clinical perspective clearly',
+      desc: 'Share your clinical assessment and reasoning using plain, accessible language. Explain without dismissing or overriding the patient\'s own framework.',
+      tip: 'Tip: Use visuals, models, and analogies drawn from the patient\'s own cultural context where possible.'
+    },
+    A: {
+      title: 'Acknowledge — where perspectives differ',
+      desc: 'Acknowledge both points of agreement and the genuine differences between the biomedical perspective and the patient\'s cultural understanding. This is not about deciding who is right — it is about respecting that both perspectives exist.',
+      tip: 'Tip: "I understand we see this a little differently — and I\'d like to find an approach that makes sense to you."'
+    },
+    R: {
+      title: 'Recommend — within cultural context',
+      desc: 'Make recommendations that are clinically sound AND culturally appropriate. A recommendation that ignores cultural context will not be followed — and following it may not be feasible or desirable.',
+      tip: 'Tip: Incorporate traditional foods and practices into dietary plans where safe and appropriate, rather than replacing them entirely.'
+    },
+    N: {
+      title: 'Negotiate — a shared, realistic plan',
+      desc: 'Develop the care plan collaboratively. Negotiation acknowledges that the patient has agency and expertise about their own life. A plan built together is far more likely to succeed than one handed down.',
+      tip: 'Tip: "What feels manageable for you to try between now and next time we meet?" is more effective than a prescriptive handout.'
+    }
+  };
+
+  // ── Tab switching ──
+  function switchTab(id, btn) {
+    document.querySelectorAll('.workshop-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+  }
+
+  // ── Resource filter ──
+  function toggleKleinman(el) {
+    const body = el.querySelector('.kleinman-q-body');
+    const arrow = el.querySelector('.kleinman-arrow');
+    const isOpen = !body.hidden;
+    body.hidden = isOpen;
+    arrow.textContent = isOpen ? '▶' : '▼';
+    el.setAttribute('aria-expanded', !isOpen);
+  }
+
+  function filterRes(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.res-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  // ── Card toggle ──
+  function toggleCard(card) {
+    const body = card.querySelector('.card-body');
+    const btn = card.querySelector('.card-toggle');
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    card.setAttribute('aria-expanded', !isOpen);
+    btn.setAttribute('aria-label', (isOpen ? 'Expand' : 'Collapse') + ' ' + card.querySelector('.card-title').textContent);
+  }
+
+  // ── Accordion toggle ──
+  function toggleAcc(item) {
+    const body = item.querySelector('.acc-body');
+    const btn = item.querySelector('.acc-header');
+    const isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', !isOpen);
+  }
+
+  // ── ASKED model ──
+  function showAsked(letter, btn) {
+    document.querySelectorAll('.letter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    const d = askedData[letter];
+    const detail = document.getElementById('asked-detail');
+    detail.innerHTML = `
+      <div class="model-word">${letter} — ${d.word}</div>
+      <div class="model-desc">${d.desc}</div>
+      <div class="model-example">
+        <div class="model-example-label">In dietetics practice</div>
+        ${d.example}
+      </div>`;
+  }
+
+  // ── LEARN model ──
+  function showLearn(letter, step) {
+    document.querySelectorAll('.learn-step').forEach(s => {
+      s.style.opacity = '0.5';
+      s.setAttribute('aria-pressed', 'false');
+    });
+    step.style.opacity = '1';
+    step.setAttribute('aria-pressed', 'true');
+    const d = learnData[letter];
+    const detail = document.getElementById('learn-detail');
+    detail.classList.add('show');
+    detail.innerHTML = `<div class="learn-detail-title">${d.title}</div><div style="font-size:15px;color:var(--ink-mid);margin-top:4px;line-height:1.75">${d.desc}</div><div style="margin-top:10px;font-size:14px;color:var(--green);font-weight:500;font-style:italic">${d.tip}</div>`;
+  }
+
+  // ── Checklist toggle ──
+  function toggleCheck(marker) {
+    const isChecked = marker.classList.toggle('checked');
+    const li = marker.parentElement;
+    if (isChecked) {
+      li.classList.add('checked-item');
+      marker.setAttribute('aria-checked', 'true');
+    } else {
+      li.classList.remove('checked-item');
+      marker.setAttribute('aria-checked', 'false');
+    }
+    updateAllProgress();
+  }
+
+  // ── Progress tracking ──
+  function updateAllProgress() {
+    updateProgress('w1');
+    updateProgress('w2');
+  }
+
+  function updateProgress(workshopId) {
+    const panel = document.getElementById(workshopId);
+    const checks = panel.querySelectorAll('.check-marker');
+    let score = 0;
+    checks.forEach(c => { if (c.classList.contains('checked')) score++; });
+    const pct = Math.round((score / checks.length) * 100);
+    document.getElementById(workshopId + '-progress').style.width = pct + '%';
+    document.getElementById(workshopId + '-pct').textContent = pct + '%';
+    const bar = panel.querySelector('.progress-track');
+    if (bar) bar.setAttribute('aria-valuenow', pct);
+  }
+
+  // ── ONTOLOGY CARD ──
+  function toggleOnto() {
+    const body = document.getElementById('onto-body');
+    const header = body.previousElementSibling;
+    const btn = header.querySelector('.onto-toggle');
+    const isHidden = body.hidden;
+    body.hidden = !isHidden;
+    header.setAttribute('aria-expanded', isHidden);
+    btn.textContent = isHidden ? '−' : '+';
+    // Activate first tab on first open
+    if (isHidden) {
+      switchOntoTab('def', document.querySelector('.onto-tab.active'));
+    }
+  }
+
+  function switchOntoTab(id, btn) {
+    document.querySelectorAll('.onto-tab-panel').forEach(p => p.hidden = true);
+    document.querySelectorAll('.onto-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+    document.getElementById('onto-' + id).hidden = false;
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+  }
+
+  // ── CASE STUDY CHATBOTS ──
+  const CASE_DATA = {
+    c2: {
+      color: '#A0622A',
+      label: 'Case 1',
+      name: 'Rahma',
+      system: `You are a Socratic learning facilitator for a dietetics education exercise about a client named Rahma — a 42-year-old Hazara Afghan woman with borderline T2DM, limited English, and a 14-year-old daughter who is trying to interpret. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Rahma or any other character. You ask probing questions that push students to think more deeply. Key frameworks students should apply: Kleinman's Explanatory Model questions, professional interpreter protocols, plain-language communication, health literacy principles, cultural food beliefs (Kittler et al.). Rules: Never give the answer directly. Always respond with a question or a prompt that deepens reflection. If a student gives a correct idea, affirm it briefly then push further. If a student gives a vague or incorrect idea, ask a clarifying question. Keep responses short — 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name when relevant. Scaffold gently if students are stuck. You are a facilitator only — never Rahma, never her daughter.`
+    },
+    c3: {
+      color: '#2D5A3D',
+      label: 'Case 2',
+      name: 'Mr. Gupta',
+      system: `You are a Socratic learning facilitator for a dietetics case study about Mr. Gupta — a 63-year-old Gujarati Indian man with hyperlipidaemia who lives in a multigenerational household where his son manages health and his daughter-in-law cooks. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Mr. Gupta, his son, or his daughter-in-law. Key frameworks: LEARN model (especially Acknowledge–Recommend–Negotiate), Campinha-Bacote's ASKED model (Encounters and Knowledge), cultural explanatory models of illness, hot/cold food belief systems, respectful modification of cultural food practices. Rules: Never give the answer directly. Respond with probing questions. Affirm correct ideas briefly then push further. Keep responses to 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name. You are a facilitator only.`
+    },
+    c4: {
+      color: '#B85C3A',
+      label: 'Case 3',
+      name: 'Mr. Rossi',
+      system: `You are a Socratic learning facilitator for a dietetics case study about Mr. Rossi — a 79-year-old Italian-born widower with limited literacy, strong emotional attachment to his late wife's cooking, high sodium intake, and uncontrolled hypertension. He hides his literacy difficulties and has felt judged by previous clinicians. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Mr. Rossi. Key frameworks: Kleinman's Explanatory Model, open-ended non-judgmental questioning, health literacy principles, non-literacy-dependent assessment, symbolic meaning of food (Kittler et al.), observation-based rather than judgement-based feedback. Rules: Never give the answer directly. Respond with probing questions. Challenge judgement-laden ideas directly. Keep responses to 2–4 sentences plus a question. Do not lecture. Reference specific frameworks by name. You are a facilitator only.`
+    },
+    c5: {
+      color: '#4A7B5C',
+      label: 'Case 4',
+      name: 'Sione',
+      system: `You are a Socratic learning facilitator for a dietetics case study about Sione — a 19-year-old Tongan-Australian university student and rugby player navigating tension between Western clean eating advice from his coach and the deep cultural meaning of shared family meals in his Tongan household. Your role is ONLY to facilitate student thinking. You do NOT roleplay as Sione, his family, or his coach. Key frameworks: Cultural humility (Tervalon & Murray-García), acculturation and cultural identity, collectivist food culture, LEARN model negotiation steps, the difference between cultural humility and cultural competence. Rules: Never give the answer directly. Respond with probing questions. Challenge assumptions students make about Pacific cultures. Push students to distinguish cultural humility from competence. Keep responses to 2–4 sentences plus a question. Do not lecture. You are a facilitator only.`
+    }
+  };
+
+  const chatState = { c2: { history: [] }, c3: { history: [] }, c4: { history: [] }, c5: { history: [] } };
+
+  function openCase(id) {
+    document.getElementById('cases-grid').style.display = 'none';
+    document.getElementById('chat-' + id).classList.add('active');
+    if (chatState[id].history.length === 0) {
+      const msgs = {
+        c2: "Welcome to Case 1. Before we dive in — your group has just been handed Rahma's referral. The 14-year-old daughter is already in the room and ready to translate. What is your first concern, and why?",
+        c3: "Welcome to Case 2. You're about to meet Mr. Gupta for the first time. His son booked the appointment and is sitting beside him. Before you say hello — what do you need to understand about this family structure, and why does it matter for your consultation?",
+        c4: "Welcome to Case 3. Mr. Rossi is in the waiting room. You've read the referral: 79 years old, high sodium, won't change diet. Before you call him in — what assumptions might you already be carrying about him, and how might those affect your approach?",
+        c5: "Welcome to Case 4. Sione has come in on his own. He says straight away: 'I just want to eat better for footy — but I can't disrespect my family.' Where do you begin, and what does cultural humility look like in this very first moment?"
+      };
+      const opening = msgs[id];
+      addMessage(id, 'tutor', opening);
+      chatState[id].history.push({ role: 'assistant', content: opening });
+    }
+  }
+
+  function closeCase(id) {
+    document.getElementById('chat-' + id).classList.remove('active');
+    document.getElementById('cases-grid').style.display = '';
+  }
+
+  function toggleBrief(id) {
+    const body = document.getElementById('brief-' + id);
+    const icon = document.getElementById('brief-icon-' + id);
+    const hidden = body.style.display === 'none';
+    body.style.display = hidden ? 'block' : 'none';
+    icon.textContent = hidden ? '▲' : '▼';
+  }
+
+  function addMessage(id, role, text) {
+    const box = document.getElementById('msgs-' + id);
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + role;
+    div.innerHTML = text.replace(/\n/g, '<br>');
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return div;
+  }
+
+  async function sendMessage(id) {
+    const input = document.getElementById('input-' + id);
+    const sendBtn = document.getElementById('send-' + id);
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage(id, 'student', text);
+    chatState[id].history.push({ role: 'user', content: text });
+    input.value = '';
+    input.style.height = '46px';
+    sendBtn.disabled = true;
+    const loadingDiv = addMessage(id, 'loading', 'Thinking\u2026');
+    try {
+      const cd = CASE_DATA[id];
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: cd.system,
+          messages: chatState[id].history
+        })
+      });
+      const data = await response.json();
+      const reply = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+      loadingDiv.remove();
+      addMessage(id, 'tutor', reply);
+      chatState[id].history.push({ role: 'assistant', content: reply });
+    } catch(e) {
+      loadingDiv.remove();
+      addMessage(id, 'tutor', 'Connection error. Please check your internet connection and try again.');
+    }
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  function handleChatKey(e, id) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(id); }
+  }
+
+  function autoResize(el) {
+    el.style.height = '46px';
+    el.style.height = Math.min(el.scrollHeight, 130) + 'px';
+  }
+
+  function downloadTranscript(id) {
+    const cd = CASE_DATA[id];
+    if (chatState[id].history.length === 0) {
+      alert('No conversation yet — start the case first!');
+      return;
+    }
+    const lines = ['DIET7103 — ' + cd.label + ': ' + cd.name, 'Downloaded: ' + new Date().toLocaleString('en-AU'), '='.repeat(60), ''];
+    chatState[id].history.forEach(m => {
+      lines.push('[' + (m.role === 'user' ? 'STUDENT GROUP' : 'AI TUTOR') + ']');
+      lines.push(m.content.replace(/<[^>]+>/g, ''));
+      lines.push('');
+    });
+    const text = lines.join('\n');
+    const filename = 'DIET7103_' + cd.label.replace(' ', '') + '_transcript.txt';
+    try {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+    } catch(e) {
+      const w = window.open('', '_blank');
+      w.document.write('<pre style="font-family:monospace;white-space:pre-wrap;padding:20px">' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>');
+      w.document.title = filename;
+    }
+  }
+</script>
+<!-- CASES PANEL -->
+  <div id="cases" class="workshop-panel" role="tabpanel" hidden>
+    <h2 class="section-title" style="margin-bottom:4px">Case Studies</h2>
+    <p style="color:var(--ink-light);font-size:14px;margin-bottom:22px;line-height:1.6">Work through each case as a group. The AI tutor will ask questions to deepen your thinking — it will never roleplay the client or give away answers. Download your transcript to submit via your LMS.</p>
+
+    <div id="cases-grid" class="case-grid">
+
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#A0622A">Case 1</span>
+        <div class="case-client-name">Rahma</div>
+        <div class="case-client-sub">42 &middot; Hazara Afghan woman &middot; Borderline T2DM</div>
+        <div class="case-summary-text">Limited English proficiency. A 14-year-old daughter is present and attempting to translate. History of gestational diabetes, now borderline T2DM. Traditional diet, irregular meal patterns, distrust of unfamiliar health systems.</div>
+        <div class="case-chips">
+          <span class="case-chip">Interpreter use</span>
+          <span class="case-chip">Health literacy</span>
+          <span class="case-chip">Kleinman questions</span>
+          <span class="case-chip">Diabetes education</span>
+        </div>
+        <button class="case-open-btn" style="background:#A0622A" onclick="openCase('c2')">Open case &rarr;</button>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#2D5A3D">Case 2</span>
+        <div class="case-client-name">Mr. Gupta</div>
+        <div class="case-client-sub">63 &middot; Gujarati Indian man &middot; Hyperlipidaemia</div>
+        <div class="case-summary-text">Lives with adult son and daughter-in-law. Son manages appointments; daughter-in-law cooks. Strong preference for traditional Gujarati vegetarian food. Believes strength comes from heavy, warm foods. Resistant to Western dietary advice.</div>
+        <div class="case-chips">
+          <span class="case-chip">Family decision-making</span>
+          <span class="case-chip">LEARN model</span>
+          <span class="case-chip">Hot/cold beliefs</span>
+          <span class="case-chip">Cultural food practices</span>
+        </div>
+        <button class="case-open-btn" style="background:#2D5A3D" onclick="openCase('c3')">Open case &rarr;</button>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#B85C3A">Case 3</span>
+        <div class="case-client-name">Mr. Rossi</div>
+        <div class="case-client-sub">79 &middot; Italian-born widower &middot; Uncontrolled hypertension</div>
+        <div class="case-summary-text">Limited reading ability in English and Italian. High-sodium diet: preserved meats, cheeses, pickled vegetables. Deep emotional attachment to foods made by his late wife. Hides literacy difficulties. Feels judged by previous clinicians.</div>
+        <div class="case-chips">
+          <span class="case-chip">Open-ended questions</span>
+          <span class="case-chip">Health literacy</span>
+          <span class="case-chip">Kleinman approach</span>
+          <span class="case-chip">Food meaning</span>
+        </div>
+        <button class="case-open-btn" style="background:#B85C3A" onclick="openCase('c4')">Open case &rarr;</button>
+      </div>
+
+      <div class="case-card">
+        <span class="case-num-badge" style="background:#4A7B5C">Case 4</span>
+        <div class="case-client-name">Sione</div>
+        <div class="case-client-sub">19 &middot; Tongan-Australian &middot; Rugby player &amp; university student</div>
+        <div class="case-summary-text">Eats high-energy traditional family meals at home. Coach recommended "clean eating," conflicting with family values. Feels guilt refusing food from aunties. Worried health professionals won't understand Pacific food culture.</div>
+        <div class="case-chips">
+          <span class="case-chip">Cultural humility</span>
+          <span class="case-chip">Acculturation</span>
+          <span class="case-chip">Identity &amp; food</span>
+          <span class="case-chip">Performance nutrition</span>
+        </div>
+        <button class="case-open-btn" style="background:#4A7B5C" onclick="openCase('c5')">Open case &rarr;</button>
+      </div>
+
+    </div>
+
+    <!-- Chat C2 -->
+    <div id="chat-c2" class="case-chat-wrap">
+      <button class="chat-back-btn" onclick="closeCase('c2')">&#8592; All cases</button>
+      <div class="chat-case-title">Case 1 &mdash; Rahma</div>
+      <div class="chat-brief">
+        <div class="chat-brief-header" onclick="toggleBrief('c2')"><span>&#128196; Case brief</span><span id="brief-icon-c2">&#9660;</span></div>
+        <div class="chat-brief-body" id="brief-c2" style="display:none"><strong>Rahma</strong> is a 42-year-old Hazara woman from Afghanistan, arrived in Australia 2 years ago. Limited English; 14-year-old daughter present and attempting to translate.<br><br><strong>Background:</strong> History of gestational diabetes, now borderline T2DM. Traditional diet (rice, naan, lentils, yogurt). Irregular meal patterns due to factory shifts. Distrust of unfamiliar health systems.<br><br><strong>Tasks:</strong> Request a professional female interpreter and explain why family cannot interpret high-risk health information. Adapt diabetes education to plain language. Replace idioms with clear instructions. Use visuals for blood sugar patterns and portions. Apply Kleinman-style questions to understand Rahma's beliefs about diabetes.</div>
+      </div>
+      <div class="chat-messages" id="msgs-c2"></div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="input-c2" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c2')"></textarea>
+        <button class="chat-send-btn" id="send-c2" onclick="sendMessage('c2')">Send</button>
+      </div>
+      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c2')">&#8681; Download transcript for your records</button></div>
+      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- Chat C3 -->
+    <div id="chat-c3" class="case-chat-wrap">
+      <button class="chat-back-btn" onclick="closeCase('c3')">&#8592; All cases</button>
+      <div class="chat-case-title">Case 2 &mdash; Mr. Gupta</div>
+      <div class="chat-brief">
+        <div class="chat-brief-header" onclick="toggleBrief('c3')"><span>&#128196; Case brief</span><span id="brief-icon-c3">&#9660;</span></div>
+        <div class="chat-brief-body" id="brief-c3" style="display:none"><strong>Mr. Gupta</strong> is a 63-year-old man recently diagnosed with hyperlipidaemia. Lives with his adult son and daughter-in-law.<br><br><strong>Background:</strong> Strong preference for traditional Gujarati vegetarian food (fried snacks, ghee-based dishes). Eldest son manages health appointments; daughter-in-law cooks all meals. Believes strength comes from "heavy, warm foods." Resistant to Western dietary advice.<br><br><strong>Tasks:</strong> Map the family decision-making structure using Campinha-Bacote's encounters and cultural knowledge. Apply Acknowledge&ndash;Recommend&ndash;Negotiate from the LEARN model. Offer culturally relevant alternatives. Identify how hot/cold beliefs influence food choices.</div>
+      </div>
+      <div class="chat-messages" id="msgs-c3"></div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="input-c3" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c3')"></textarea>
+        <button class="chat-send-btn" id="send-c3" onclick="sendMessage('c3')">Send</button>
+      </div>
+      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c3')">&#8681; Download transcript for your records</button></div>
+      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- Chat C4 -->
+    <div id="chat-c4" class="case-chat-wrap">
+      <button class="chat-back-btn" onclick="closeCase('c4')">&#8592; All cases</button>
+      <div class="chat-case-title">Case 3 &mdash; Mr. Rossi</div>
+      <div class="chat-brief">
+        <div class="chat-brief-header" onclick="toggleBrief('c4')"><span>&#128196; Case brief</span><span id="brief-icon-c4">&#9660;</span></div>
+        <div class="chat-brief-body" id="brief-c4" style="display:none"><strong>Mr. Rossi</strong> is a 79-year-old Italian-born widower with limited reading ability in English and Italian. Uncontrolled hypertension and high sodium intake.<br><br><strong>Background:</strong> Diet of preserved meats, cheeses, homemade pickled vegetables. Deep emotional attachment to foods prepared by his late wife. Hides difficulty reading labels. Feels judged by previous clinicians.<br><br><strong>Tasks:</strong> Conduct a nutrition assessment using open-ended, non-literacy-dependent questions. Use visual tools (food models, pictures of lower-salt alternatives). Explore food's emotional meaning using Kleinman's approach. Ask what family traditions matter most before recommending changes.</div>
+      </div>
+      <div class="chat-messages" id="msgs-c4"></div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="input-c4" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c4')"></textarea>
+        <button class="chat-send-btn" id="send-c4" onclick="sendMessage('c4')">Send</button>
+      </div>
+      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c4')">&#8681; Download transcript for your records</button></div>
+      <p class="chat-note">Transcript is stored in your browser only. Download before closing the tab.</p>
+    </div>
+
+    <!-- Chat C5 -->
+    <div id="chat-c5" class="case-chat-wrap">
+      <button class="chat-back-btn" onclick="closeCase('c5')">&#8592; All cases</button>
+      <div class="chat-case-title">Case 4 &mdash; Sione</div>
+      <div class="chat-brief">
+        <div class="chat-brief-header" onclick="toggleBrief('c5')"><span>&#128196; Case brief</span><span id="brief-icon-c5">&#9660;</span></div>
+        <div class="chat-brief-body" id="brief-c5" style="display:none"><strong>Sione</strong> is a 19-year-old Tongan-Australian university student and rugby player.<br><br><strong>Background:</strong> Eats high-energy traditional family meals at home (large portions, shared dishes). Team coach recommended "clean eating," which conflicts with family values. Feels guilt refusing food from aunties. Worried that health professionals don't understand Pacific food culture.<br><br><strong>Tasks:</strong> Explore the meaning of food in Sione's family &mdash; community, respect, identity. Identify where Western nutrition guidance clashes with cultural expectations. Negotiate realistic performance nutrition goals that honour cultural meals. Practise cultural humility: acknowledge what you don't know about Pacific foodways.</div>
+      </div>
+      <div class="chat-messages" id="msgs-c5"></div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="input-c5" placeholder="Your group's response..." rows="1" oninput="autoResize(this)" onkeydown="handleChatKey(event,'c5')"></textarea>
+        <button class="chat-send-btn" id="send-c5" onclick="sendMessage('c5')">Send</button>
+      </div>
+      <div class="chat-actions"><button class="chat-dl-btn" onclick="downloadTranscript('c5')">&#8681; Download transcript
